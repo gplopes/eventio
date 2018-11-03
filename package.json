@@ -1,0 +1,28 @@
+{
+  "name": "eventio",
+  "version": "0.0.1",
+  "description": "envetio - strv project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gplopes/eventio.git"
+  },
+  "author": "Gabo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gplopes/eventio/issues"
+  },
+  "homepage": "https://github.com/gplopes/eventio#readme",
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "next": "^7.0.2",
+    "node-sass": "^4.9.4",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}
