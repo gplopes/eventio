@@ -1,0 +1,60 @@
+@import "../../styles/core.scss";
+
+.Button {
+  outline: none;
+  display: inline-block;
+  height: 45px;
+  padding: 0 20px;
+  line-height: 45px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .Icon {
+    margin: 0 auto;
+  }
+}
+
+// Sizes
+.button {
+  &-small {
+    height: 32px;
+    line-height: 32px;
+    min-width: 100px;
+  }
+  &-big {
+    min-width: 200px;
+  }
+}
+
+// Colors
+.button {
+  &-primary {
+    color: white;
+    background-color: $colors-primary;
+    &:hover {
+      background-color: darken($colors-primary, 2);
+    }
+  }
+  &-update {
+    color: $colors-text;
+    background-color: $colors-grey-light;
+    &:hover {
+      background-color: darken($colors-grey-light, 2);
+    }
+  }
+}

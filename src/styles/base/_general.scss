@@ -1,0 +1,61 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: $body-font-size;
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+}
+
+
+body {
+  color: $colors-text;
+  font-size: $body-font-size;
+  font-weight: $body-font-weight;
+  line-height: $body-line-height;
+  margin: 0 auto;
+  overflow-x: hidden;
+
+  @include media($breakpoint-phablet) {
+    text-align: center;
+  }
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-size: $body-font-size;
+  font-family: $font-primary;
+}
+
+hr {
+  margin: 1.5rem auto;
+  border: 0;
+  height: 1px;
+}
+
+a {
+  color: $colors-text;
+  font-weight: $weight-medium;
+  cursor: pointer;
+  text-decoration: none;
+  strong {
+    color: currentColor;
+  }
+  &:hover {
+    //color: $colors-link-hover;
+  }
+}
+
+strong {
+  font-weight: $weight-bold;
+}
+
+img {
+  display: block;
+  height: auto;
+  width: 100%;
+}

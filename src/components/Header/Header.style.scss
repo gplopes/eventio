@@ -1,0 +1,24 @@
+@import "../../styles//core.scss";
+
+.Header {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  //border: 1px solid red;
+  width: 100%;
+
+  color: $colors-grey-light;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+
+.Header-logo {
+  width: 30px;
+}

@@ -1,0 +1,38 @@
+// -- Breakpoints
+$breakpoint-fullhd: 1384px;
+$breakpoint-widescreen: 1192px;
+$breakpoint-desktop: 1000px;
+$breakpoint-tablet-ls: 1050px;
+$breakpoint-tablet: 750px;
+$breakpoint-mobile: 400px;
+$breakpoint-phablet: 550px;
+
+// -- Font Weights
+$weight-light: 300 !default;
+$weight-normal: 400 !default;
+$weight-medium: 500 !default;
+$weight-semibold: 600 !default;
+$weight-bold: 700 !default;
+
+// -- Body
+$body-font-weight: $weight-normal;
+$body-font-size: 15px !default;
+$body-line-height: 24px !default;
+
+// -- Typography
+$font-primary: "Hind", sans-serif;
+$font-secondary: "Playfair Display", serif;
+//$font-primary: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+
+$size-1: 4rem !default;
+$size-2: 3.5rem !default;
+$size-3: 3rem !default;
+$size-4: 2.5rem !default;
+$size-5: 2.25rem !default;
+$size-6: 1rem !default;
+$size-7: 0.75rem !default;
+
+// -- Globals
+$global-radius: 80px !default;
+$global-padding: 3rem !default;
+$global-speed: 86ms !default;

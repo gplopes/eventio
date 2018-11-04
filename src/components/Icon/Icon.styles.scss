@@ -1,0 +1,16 @@
+.Icon {
+  width: 24px;
+  height: 24px;
+  right: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+.icon-eye {
+  background-image: url("/static/icon/icon-show.svg");
+}
+
+.icon-loading {
+  background-image: url("/static/icon/icon-loading.svg");
+}

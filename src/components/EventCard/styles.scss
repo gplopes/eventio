@@ -1,0 +1,18 @@
+@import "../../styles//core.scss";
+
+.EventCard {
+  margin-top: 100px;
+  background-color: white;
+  width: 33%;
+  padding: $global-padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.EventCard_footer {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

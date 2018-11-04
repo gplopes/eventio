@@ -1,0 +1,55 @@
+@import '../../styles/core.scss';
+
+.TextInput {
+  margin-top: 20px;
+  min-height: 59px;
+}
+
+.TextInput_wrap {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid $colors-grey-light;
+  //margin: 35px 0;
+
+  &.isFocus {
+    border-bottom-color: $colors-dark;
+  }
+  &.hasContent {
+    .TextInput-label {
+      font-size: 13px;
+      transform: translate3d(0, -80%, 0 );
+    }
+  }
+
+  // Error Value
+  &.invalid {
+    border-bottom-color: $colors-alert;
+  }
+}
+
+
+.TextInput-alert {
+  color: $colors-alert;
+}
+
+.TextInput-label {
+  color: $colors-text-light;
+  height: 33px;
+  line-height: 33px;
+  z-index: -1;
+  position: absolute;
+  transition: all 0.3s $easing-inOutExpo;
+}
+
+.TextInput-input {
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  height: 33px;
+  line-height: 33px;
+  width: 100%;
+
+  &[type="password"] {
+    letter-spacing: 3px;
+  }
+}
