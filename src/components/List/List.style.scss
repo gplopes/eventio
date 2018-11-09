@@ -1,0 +1,31 @@
+@import "../../styles/core.scss";
+
+.List-filter {
+  border: 1px solid red;
+  li {
+    list-style: none;
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0 34px 0 0;
+    font-weight: $weight-semibold;
+    color: $colors-grey-chateau;
+    cursor: pointer;
+    transition: color 0.2s $easing-outQuart;
+
+    &:hover {
+      color: $colors-grey-iron;
+    }
+    &.active {
+      color: $colors-blue-spruce;
+    }
+  }
+}
+
+
+.List-switcher {
+  border: 1px solid blue;
+  .Icon:hover {
+    opacity: 0.8;
+  }
+}

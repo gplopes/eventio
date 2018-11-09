@@ -1,14 +1,11 @@
 footer,
 header,
 section {
-  @extend %clearfix;
   float: left;
   width: 100%;
   position: relative;
   padding: $global-padding 0;
-  border: 1px solid red;
 }
-
 
 .row {
   @extend %clearfix;
@@ -19,11 +16,12 @@ section {
 }
 
 .container {
-  //@extend %clearfix;
+  // @extend %clearfix;
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
   position: relative;
+  padding: 0 60px;
   @media (max-width: $breakpoint-desktop) {
     padding: 0 60px;
   }
@@ -34,5 +32,12 @@ section {
   @media (max-width: $breakpoint-mobile) {
     padding: 0 20px;
   }
+}
+
+.card {
+  width: 100%;
+  padding: 32px;
+  background-color: white;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.11);
 }
 

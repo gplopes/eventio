@@ -1,0 +1,64 @@
+@import "../../styles/core.scss";
+
+.Account-Dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  padding-top: 10px;
+
+  ul {
+    position: relative;
+    min-width: 162px;
+    padding: 6px 0;
+    background-color: white;
+    box-shadow: 0 1px 50px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: -20px;
+      right: 28px;
+      width: 28px;
+      height: 28px;
+      background-image: url("/static/triangle.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  li {
+    list-style: none;
+    padding: 5px 20px;
+  }
+  a {
+    color: $colors-grey-chateau;
+    &:hover {
+      color: $colors-text;
+    }
+  }
+}
+
+.Account {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.Account-button {
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:after {
+    content: "";
+    margin-left: 8px;
+    width: 10px;
+    height: 10px;
+
+    background-image: url("/static/icon/icon-dropdown.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

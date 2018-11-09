@@ -1,24 +1,37 @@
-@import "../../styles//core.scss";
+@import "../../styles/core.scss";
 
 .Header {
+  padding: 39px 0; //30px 0;
   z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
-  //border: 1px solid red;
   width: 100%;
-
-  color: $colors-grey-light;
+  font-size: 15px;
+  color: $colors-grey-regent;
 
   .container {
+    max-width: 1380px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 }
 
-
-
-.Header-logo {
-  width: 30px;
+.Header-nonauth {
+  font-size: 14px;
+  color: $colors-text-light;
+  a {
+    color: $colors-grey-regent;
+    font-weight: $weight-semibold;
+    &:hover {
+      color: $colors-blue-spruce;
+    }
+  }
 }
+
+
+.Logo {
+  width: 29px;
+}
+

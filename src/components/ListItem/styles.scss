@@ -1,0 +1,34 @@
+@import "../../styles/core.scss";
+
+.ListItem {
+  background: white;
+  padding: 13px 32px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.11);
+  color: $colors-blue-spruce;
+
+  h6 {
+    margin-bottom: 0;
+  }
+}
+
+
+.ListItem-desc {
+  color: $colors-grey-regent;
+  font-size: 16px;
+}
+
+.ListItem-owner {
+  color: $colors-brown-boulder;
+  font-size: 14px;
+}
+
+.ListItem-date {
+  color: $colors-grey-iron;
+  font-size: 14px;
+}
+
+.ListItem-attendees {
+  font-size: 14px;
+  color: $colors-grey-iron;
+}
+

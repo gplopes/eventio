@@ -4,13 +4,55 @@
   right: 0;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 16px;
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.small {
+    background-size: 12px;
+  }
 }
 
 .icon-eye {
   background-image: url("/static/icon/icon-show.svg");
 }
 
+.icon-close {
+  background-image: url("/static/icon/icon-close.svg");
+}
+
 .icon-loading {
   background-image: url("/static/icon/icon-loading.svg");
+}
+
+.icon-user {
+  background-image: url("/static/icon/icon-user.svg");
+}
+
+.icon-delete {
+  background-image: url("/static/icon/icon-delete.svg");
+}
+
+.icon-back {
+  background-image: url("/static/icon/icon-back.svg");
+}
+
+.icon-plus {
+  background-image: url("/static/icon/icon-plus.svg");
+}
+
+
+.icon-grid {
+  background-image: url("/static/icon/icon-grid.svg");
+  &.active {
+    background-image: url("/static/icon/icon-grid-active.svg");
+  }
+}
+
+.icon-list {
+  background-image: url("/static/icon/icon-list.svg");
+  &.active {
+    background-image: url("/static/icon/icon-list-active.svg");
+  }
 }

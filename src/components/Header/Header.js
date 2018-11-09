@@ -1,23 +1,34 @@
 import React from "react";
-import Link from "next/link";
 
 import "./Header.style.scss";
 
-const Header = () => {
+import { withConsumer } from "../../store";
+import Account from "../Account";
+import Logo from "./components/Logo";
+import { NonAuth } from './components/Messages';
+
+function Header(props) {
+  const { lightLogo, centerItem, rightItem, auth, user } = props;
+
+  const renderRightItem = () => {
+    return auth ? <Account {...user} /> : <NonAuth />;
+  };
   return (
     <header className="Header">
       <div className="container">
-        <img
-          src="./static/logo.svg"
-          className="Header-logo"
-          alt="Envetio Logo"
-        />
-        <p>
-          Don’t have account? <Link href="/signup">SIGN UP</Link>
-        </p>
+        <Logo light={lightLogo} />
+        {centerItem}
+        {renderRightItem()}
       </div>
     </header>
   );
+}
+
+Header.defaultProps = {
+  auth: false,
+  lightLogo: false,
+  rightItem: null,
+  centerItem: null
 };
 
-export default Header;
+export default withConsumer(Header);

@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import Icon from '../Icon/Icon';
 import "./Button.styles.scss";
+import Icon from '../Icon/Icon';
 
 function Button({ children, type, size, disabled, onClick, loading }) {
   const buttonClasses = classNames(
@@ -18,6 +18,7 @@ function Button({ children, type, size, disabled, onClick, loading }) {
     </button>
   );
 }
+
 
 Button.Type = {
   primary: "primary",
@@ -34,7 +35,7 @@ Button.Size = {
 Button.defaultProps = {
   type: Button.Type.primary,
   disabled: false,
-  loading: true,
+  loading: false,
   size: Button.Size.big,
   onClick: function() {}
 };

@@ -1,4 +1,4 @@
-section {
+main {
   li + li {
     margin-top: 0.25em;
   }
@@ -10,7 +10,7 @@ section {
   pre,
   table {
     &:not(:last-child) {
-      margin-bottom: 1em;
+      //margin-bottom: 1em;
     }
   }
   h1,
@@ -61,30 +61,23 @@ section {
   }
 
   h5 {
-    font-size: 1.125em;
-    margin-bottom: 0.8888em;
+    font-size: 22px;
+    margin-bottom: 0.28em;
   }
 
   h6 {
-    font-size: 1em;
-    margin-bottom: 1em;
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
-  ol {
-    list-style: decimal outside;
-    margin-left: 2em;
-    margin-top: 1em;
-  }
-  ul {
-    list-style: disc outside;
-    margin-left: 2em;
-    margin-top: 1em;
-    ul {
-      list-style-type: circle;
-      margin-top: 0.5em;
-      ul {
-        list-style-type: square;
-      }
-    }
-  }
+}
+
+
+// Colors
+.text-light {
+  color: $colors-grey-regent;
+}
+
+.text-alert {
+  color: $colors-alert;
 }

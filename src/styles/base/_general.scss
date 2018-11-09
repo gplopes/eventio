@@ -4,13 +4,14 @@ html {
   font-size: $body-font-size;
   min-width: 300px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  //overflow-y: scroll;
   text-rendering: optimizeLegibility;
 }
 
 
 body {
   color: $colors-text;
+  background-color: $colors-body-background;
   font-size: $body-font-size;
   font-weight: $body-font-weight;
   line-height: $body-line-height;
@@ -20,6 +21,10 @@ body {
   @include media($breakpoint-phablet) {
     text-align: center;
   }
+}
+
+main {
+  min-height: 100vh;
 }
 
 body,
@@ -42,6 +47,7 @@ a {
   font-weight: $weight-medium;
   cursor: pointer;
   text-decoration: none;
+  transition: color 0.2s $easing-inQuad;
   strong {
     color: currentColor;
   }

@@ -11,7 +11,23 @@
     content: "";
   }
 }
+.clickable {
+  cursor: pointer;
+}
 
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .flex-row {
   display: flex;

@@ -8,6 +8,7 @@
 .TextInput_wrap {
   display: flex;
   width: 100%;
+  transition: border 0.2s $easing-inQuad;
   border-bottom: 1px solid $colors-grey-light;
   //margin: 35px 0;
 
@@ -33,16 +34,19 @@
 }
 
 .TextInput-label {
+  will-change: transform;
   color: $colors-text-light;
   height: 33px;
   line-height: 33px;
-  z-index: -1;
+  z-index: 1;
   position: absolute;
-  transition: all 0.3s $easing-inOutExpo;
+  transition: all 0.2s $easing-inOutExpo;
 }
 
 .TextInput-input {
   outline: none;
+  position: relative;
+  z-index: 2;
   border: 0;
   background-color: transparent;
   height: 33px;

@@ -1,0 +1,19 @@
+@import "../../styles/core.scss";
+
+.EventDetail {
+  text-transform: uppercase;
+  font-weight: $weight-semibold;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.EventDetail-id {
+  color: $colors-grey-aluminium;
+}
+
+.EventDetail-delete {
+  color: $colors-red-strawberry;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+}
