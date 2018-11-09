@@ -14,16 +14,9 @@ export const withContext = Wrapper =>
   };
 // Constants
 export const constants = {
-  ALL_EVENTS: "ALL_EVENTS",
-  FUTURE_EVENTS: "FUTURE_EVENTS",
-  PAST_EVENTS: "PAST_EVENTS",
+  ALL_EVENTS: "ALL EVENTS",
+  FUTURE_EVENTS: "FUTURE EVENTS",
+  PAST_EVENTS: "PAST EVENTS",
   GRID_VIEW: "GRID_VIEW",
   LIST_VIEW: "LIST_VIEW"
 };
-
-export const ALL_EVENTS = "ALL_EVENTS";
-export const FUTURE_EVENTS = "FUTURE_EVENTS";
-export const PAST_EVENTS = "PAST_EVENTS";
-
-export const GRID_VIEW = "GRID_VIEW";
-export const LIST_VIEW = "LIST_VIEW";

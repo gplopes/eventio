@@ -1,17 +1,18 @@
 @import "../../styles/core.scss";
 
 .List-filter {
-  border: 1px solid red;
   li {
     list-style: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: $font-size-small;
     text-transform: uppercase;
     padding: 0 34px 0 0;
     font-weight: $weight-semibold;
     color: $colors-grey-chateau;
-    cursor: pointer;
     transition: color 0.2s $easing-outQuart;
+    div {
+      cursor: pointer;
+    }
 
     &:hover {
       color: $colors-grey-iron;
@@ -22,10 +23,57 @@
   }
 }
 
-
 .List-switcher {
-  border: 1px solid blue;
   .Icon:hover {
     opacity: 0.8;
+  }
+}
+
+.NoEvent {
+  margin-top: 100px;
+  opacity: 0.2;
+  img {
+    display: block;
+    margin: 0;
+    width: 50px;
+    margin-bottom: 20px;
+  }
+}
+
+
+.FilterMenu-dropdown {
+  position: relative;
+  font-size: $font-size-small;
+  font-weight: $weight-semibold;
+  color: $colors-grey-chateau;
+  cursor: pointer;
+}
+
+.FilterMenu-selected {
+  margin-left: 8px;
+  &:hover {
+    color: black;
+  }
+}
+
+.FilterMenu-mobile {
+  z-index: 10;
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  background: white;
+  text-align: left;
+  padding: $global-padding;
+  text-transform: uppercase;
+  box-shadow: 0 1px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  div {
+    cursor: pointer;
+    padding: 10px 0;
+  }
+
+  &.opened {
+    display: block;
   }
 }

@@ -21,6 +21,13 @@
   color: $colors-grey-iron;
 }
 
+.EventCard-Link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .EventCard-about {
   p {
     font-size: 14px;

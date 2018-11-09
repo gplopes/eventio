@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import "./ListItem.styles.scss";
+import trim from "../../utils/trim";
 import beautifyDate from "../../utils/beautifyDate";
-
-import "./styles.scss";
-
-import Icon from "../Icon/Icon";
-import Button from "../Button/Button";
+import Button from "../Button";
 
 function ListItem({
   startsAt,
@@ -18,12 +17,14 @@ function ListItem({
   return (
     <div className="ListItem flex-row">
       <h6 className="strong">{title}</h6>
-      <p className="ListItem-desc">{description}</p>
+      <p className="ListItem-desc">{trim(description, 31)}</p>
       <p className="ListItem-owner">
         {owner.firstName} {owner.lastName}
       </p>
       <span className="ListItem-date">{beautifyDate(startsAt)}</span>
-      <span className="ListItem-attendees">{attendees.length} of {capacity}</span>
+      <span className="ListItem-attendees">
+        {attendees.length} of {capacity}
+      </span>
       <Button type={Button.Type.update} size="small">
         Edit
       </Button>

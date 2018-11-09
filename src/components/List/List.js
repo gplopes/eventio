@@ -19,6 +19,8 @@ import NoEvent from "./components/NoEvent";
 const filterItem = type => data => {
   const today = new Date();
   const eventDate = new Date(data.startsAt);
+  if (type === constants.ALL_EVENTS) return true;
+
   if (type === constants.FUTURE_EVENTS && today < eventDate) {
     console.log("future");
     return true;
@@ -40,7 +42,7 @@ export default class List extends PureComponent {
     return {
       hasEvents: props.events.length > 0,
       prevEvents: props.events,
-      events: props.events
+      events: props.events.filter(filterItem(constants.ALL_EVENTS))
     };
   }
   state = {
@@ -50,17 +52,13 @@ export default class List extends PureComponent {
     view: constants.GRID_VIEW,
     filter: constants.ALL_EVENTS
   };
-
   toggleView = view => {
     this.setState({ view });
   };
 
   toggleFilter = filter => {
     const { events } = this.props;
-    const newEvents =
-      filter === constants.ALL_EVENTS
-        ? events
-        : events.filter(filterItem(filter));
+    const newEvents = events.filter(filterItem(filter));
     this.setState({
       filter,
       hasEvents: newEvents.length > 0,
@@ -75,8 +73,6 @@ export default class List extends PureComponent {
   renderList = () => {
     const { grid } = this.props;
     const { events, view } = this.state;
-    // const colSize = view === constants.LIST_VIEW ? 100 : 100 / grid;
-    // const col = { width: `${colSize}%` };
     const colSize = view === constants.LIST_VIEW ? 1 : grid;
     return (
       <Section>

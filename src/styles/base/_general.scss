@@ -18,9 +18,9 @@ body {
   margin: 0 auto;
   overflow-x: hidden;
 
-  @include media($breakpoint-phablet) {
-    text-align: center;
-  }
+  // @include media($breakpoint-phablet) {
+  //   text-align: center;
+  // }
 }
 
 main {

@@ -4,10 +4,11 @@ import Page from "../src/layouts/Page";
 
 import { withConsumer } from "../src/store";
 
-import List from "../src/components/List/List";
-import Action from "../src/components/ActionButton/ActionButton";
+import List from "../src/components/List";
+import Action from "../src/components/ActionButton";
 
 class Dashboard extends Component {
+
   handleAction = () => {
     Router.push("/event/create");
   };

@@ -22,6 +22,7 @@ Icon.Type = {
   plus: "icon-plus",
   delete: "icon-delete",
   close: "icon-close",
+  arrowBack: "icon-arrow",
 };
 
 Icon.defaultProps = {

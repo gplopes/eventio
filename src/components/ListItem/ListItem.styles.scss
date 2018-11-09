@@ -1,16 +1,35 @@
 @import "../../styles/core.scss";
 
 .ListItem {
+  position: relative;
   background: white;
-  padding: 13px 32px;
+  padding: 25px 32px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.11);
   color: $colors-blue-spruce;
-
+  
   h6 {
     margin-bottom: 0;
   }
-}
 
+  @include media($breakpoint-tablet-ls) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h6 {
+      margin-bottom: 5px;
+    }
+
+    .ListItem-owner {
+      display: none;
+    }
+
+    .Button {
+      position: absolute;
+      bottom: 13px;
+      right: 32px;
+    }
+  }
+}
 
 .ListItem-desc {
   color: $colors-grey-regent;
@@ -31,4 +50,3 @@
   font-size: 14px;
   color: $colors-grey-iron;
 }
-
