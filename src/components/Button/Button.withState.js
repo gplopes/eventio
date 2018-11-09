@@ -1,17 +1,19 @@
 import React from "react";
 import Router from "next/router";
-import Button from "../../Button";
-import { withConsumer } from "../../../store";
+
+import { withConsumer } from "../../store";
+
+import Button from "./Button";
 
 const buttonStates = ({ ownerId, myId, attendees, actions }) => {
   const state = {
     edit: {
       type: Button.Type.update,
       text: "edit",
-      action: () =>
+      action: (eventId) =>
         Router.push({
           pathname: "/event",
-          query: { id: "58493db9691ecc0d3da51bfd", edit: true }
+          query: { id: eventId, edit: true }
         })
     },
     leave: {
@@ -37,11 +39,14 @@ const buttonStates = ({ ownerId, myId, attendees, actions }) => {
   return state.join;
 };
 
-function ButtonWithState({ myId, ownerId, attendees, actions }) {
+function ButtonWithState({ myId, ownerId, attendees, actions, eventId }) {
   const buttonInfo = buttonStates({ myId, ownerId, attendees, actions });
-  console.log("hey", buttonInfo);
   return (
-    <Button onClick={buttonInfo.action} type={buttonInfo.type} size="small">
+    <Button
+      onClick={() => buttonInfo.action(eventId)}
+      type={buttonInfo.type}
+      size="small"
+    >
       {buttonInfo.text}
     </Button>
   );

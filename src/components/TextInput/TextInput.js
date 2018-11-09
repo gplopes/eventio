@@ -2,17 +2,42 @@ import React, { PureComponent } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 
 import "./TextInput.styles.scss";
 
+const isDateOrTime = type => {
+  return type === "date" || type === "time";
+};
+
 class TextInput extends PureComponent {
-  state = {
-    value: "",
-    isValid: true,
-    isFocus: false,
-    hasContent: false
-  };
+  static getDerivedStateFromProps(props, state) {
+    if (isDateOrTime(props.type)) {
+      return {
+        hasContent: true
+      };
+    }
+    return {};
+  }
+  constructor() {
+    super();
+
+    this.state = {
+      value: "",
+      isValid: true,
+      isFocus: false,
+      hasContent: false
+    };
+
+    this.inputProps = {
+      // type,
+      // value: value,
+      className: "TextInput-input",
+      onBlur: this.handleBlur,
+      onFocus: this.handleFocus,
+      onChange: this.handleChange
+    };
+  }
 
   handleFocus = () => {
     this.setState({ hasContent: true, isFocus: true, isValid: true });
@@ -26,44 +51,38 @@ class TextInput extends PureComponent {
     this.setState({
       hasContent,
       isValid,
-      isFocus: false,
+      isFocus: false
     });
     this.props.onFinish({ value, isValid });
   };
-  getVal = () => {
-    const { value, isValid } = this.state;
-    //const isValid = value.length > 0 && !invalid;
+  getVal = () => this.state.value;
+  isValid = () => this.state.isValid;
 
-    return { value, isValid };
-  };
   handleChange = evt => {
     this.setState({ value: evt.target.value });
   };
+  _renderErr = () => {
+    const { errorMsg } = this.props;
+    return <small className="TextInput-alert">{errorMsg}</small>;
+  };
   render() {
     const { hasContent, isFocus, value, isValid } = this.state;
-    const { type, label, icon, iconType, errorMsg } = this.props;
+    const { type, label, icon, iconType } = this.props;
 
     const wrapClasses = classNames("TextInput_wrap", {
       hasContent,
       invalid: !isValid && hasContent,
       isFocus
     });
-    const inputProps = {
-      type: isFocus && hasContent ? type : "text",
-      value: value,
-      className: "TextInput-input",
-      onBlur: this.handleBlur,
-      onFocus: this.handleFocus,
-      onChange: this.handleChange
-    };
+    const showErr = !isValid && hasContent;
     return (
       <div className="TextInput">
         <div className={wrapClasses}>
           <span className="TextInput-label">{label}</span>
-          <input {...inputProps} />
+          <input {...this.inputProps} type={type} value={value} />
           {icon && <Icon type={iconType} />}
         </div>
-        {!isValid && hasContent && <small className="TextInput-alert">{errorMsg}</small>}
+        {showErr && this._renderErr()}
       </div>
     );
   }

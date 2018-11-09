@@ -9,3 +9,9 @@
 .cols-4 {
   @include cols(4);
 }
+
+.cols-1 {
+  .col {
+    padding: 1rem 0;
+  }
+}

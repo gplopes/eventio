@@ -9,7 +9,7 @@ function Icon({ type, onClick, className, size }) {
     [size]: size !== 'normal',
     clickable: onClick !== null
   });
-  return <div onClick={onClick} className={iconClasses} />;
+  return <span onClick={onClick} className={iconClasses} />;
 }
 
 Icon.Type = {

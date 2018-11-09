@@ -2,11 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./ListItem.styles.scss";
+
+import { withConsumer } from "../../store";
 import trim from "../../utils/trim";
 import beautifyDate from "../../utils/beautifyDate";
-import Button from "../Button";
+import { ButtonWithState } from "../Button";
 
 function ListItem({
+  user: { id },
+  _id,
   startsAt,
   title,
   owner,
@@ -14,6 +18,7 @@ function ListItem({
   attendees,
   description
 }) {
+  const buttonProps = { myId: id, ownerId: owner.id, attendees, eventId: _id };
   return (
     <div className="ListItem flex-row">
       <h6 className="strong">{title}</h6>
@@ -25,15 +30,14 @@ function ListItem({
       <span className="ListItem-attendees">
         {attendees.length} of {capacity}
       </span>
-      <Button type={Button.Type.update} size="small">
-        Edit
-      </Button>
+      <ButtonWithState {...buttonProps } />
     </div>
   );
 }
 
 ListItem.defaultProps = {
-  attendees: []
+  attendees: [],
+  user: { id: 0 }
 };
 
 ListItem.propTypes = {
@@ -48,4 +52,4 @@ ListItem.propTypes = {
   }).isRequired
 };
 
-export default ListItem;
+export default withConsumer(ListItem);

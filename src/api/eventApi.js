@@ -1,29 +1,17 @@
-import axios from "axios";
-import { apiKey } from "./apiConfig";
+import { eventUrl, api } from "./apiConfig";
 
-const getEvents = () =>
-  axios({
-    method: "GET",
-    url: "https://testproject-api-v2.strv.com/events",
-    headers: {
-      "Content-Type": "application/json",
-      APIKey: apiKey
-    }
-  });
-// request(
-//   {
-//     method: "GET",
-//     url: "https://testproject-api-v2.strv.com/events",
-//     headers: {
-//       "Content-Type": "application/json",
-//       APIKey: apiKey
-//     }
-//   },
-//   function(error, response, body) {
-//     console.log("Status:", response.statusCode);
-//     console.log("Headers:", JSON.stringify(response.headers));
-//     console.log("Response:", body);
-//   }
-// );
+const allEvents = () => api.get(eventUrl).then(({ data }) => data);
 
-export default { getEvents };
+const joinEvent = (eventId, userToken) => {
+  const url = `${eventUrl}/${eventId}/attendees/me`;
+  api.defaults.headers.common['Authorization'] = userToken;
+  return api.post(url);
+};
+
+const leaveEvent = (eventId, userToken) => {
+  const url = `${eventUrl}/${eventId}/attendees/me`;
+  api.defaults.headers.common['Authorization'] = userToken;
+  return api.delete(url);
+};
+
+export default { allEvents, joinEvent, leaveEvent };

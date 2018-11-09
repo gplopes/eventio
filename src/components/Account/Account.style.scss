@@ -4,7 +4,7 @@
   position: absolute;
   right: 0;
   top: 100%;
-  padding-top: 10px;
+  padding-top: 15px;
 
   ul {
     position: relative;
@@ -12,13 +12,13 @@
     padding: 6px 0;
     background-color: white;
     box-shadow: 0 1px 50px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
+    border-radius: 10px;
 
     &:after {
       content: "";
       position: absolute;
       top: -20px;
-      right: 28px;
+      right: 15px;
       width: 28px;
       height: 28px;
       background-image: url("/static/triangle.svg");
@@ -43,6 +43,12 @@
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  .Avatar {
+    will-change: transform, opacity;
+    animation: popIn 0.5s $easing-inOutExpo;
+  }
 }
 
 .Account-button {
@@ -60,5 +66,22 @@
     background-image: url("/static/icon/icon-dropdown.svg");
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 100%;
+  }
+
+  &:hover {
+    color: $colors-blue-spruce;
+    &:after {
+      background-image: url("/static/icon/icon-dropdown-dark.svg");
+    }
+  }
+
+  @include media($breakpoint-mobile) {
+    p {
+      display: none;
+    }
+    &:after {
+      margin-left: 0;
+    }
   }
 }

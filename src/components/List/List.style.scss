@@ -1,5 +1,6 @@
 @import "../../styles/core.scss";
 
+
 .List-filter {
   li {
     list-style: none;
@@ -71,6 +72,9 @@
   div {
     cursor: pointer;
     padding: 10px 0;
+    &:hover {
+      color: $colors-blue-spruce;
+    }
   }
 
   &.opened {

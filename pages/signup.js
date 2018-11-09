@@ -7,6 +7,7 @@ import TextInput from "../src/components/TextInput/TextInput";
 import Button from "../src/components/Button/Button";
 
 import validateEmail from "../src/utils/validateEmail";
+import validatePassword from "../src/utils/validatePassword";
 
 class SignUp extends PureComponent {
   static async getInitialProps() {
@@ -45,21 +46,38 @@ class SignUp extends PureComponent {
       label: "Password",
       type: "password",
       icon: true,
+      //validator: this.checkPassword,
       iconType: TextInput.Icon.eye
     };
 
     this.passwordRepeatProps = {
       ...this.passwordProps,
-      ref: node => (this.passwordRepeat = node),
+      ref: node => (this.repeatPassword = node),
+      validator: this.checkRepeatPassword,
+      errorMsg: "Passwords are not matching",
       label: "Repeat Password",
       type: "password"
     };
   }
+  checkPassword = password => {
+    const repeatPassword = this.repeatPassword.getVal().value;
+    return validatePassword(password, repeatPassword);
+  };
+  checkRepeatPassword = repeatPassword => {
+    const password = this.password.getVal().value;
+    return validatePassword(password, repeatPassword);
+  };
   handleSubmit = () => {
+    // Checker
     const email = this.email.getVal();
-    const password = this.password.getVal();
+    const password = this.password.getVal().value;
+    const repeatPassword = this.repeatPassword.getVal().value;
 
-    if (!email.isValid || !password.isValid) {
+    // No check
+    const name = this.name.getVal().value;
+    const lastName = this.lastName.getVal().value;
+
+    if (!email.isValid || repeatPassword !== password) {
       this.setState({ hasError: true });
       return false;
     }
@@ -80,10 +98,10 @@ class SignUp extends PureComponent {
     const { isSubmitting } = this.state;
 
     return (
-      <Page className="SignUp flex">
+      <Page className="SignUp flex" fullScreen>
         <Banner />
         <section className="centered-content">
-          <div className="container" style={{ width: 500, marginTop: 32 }}>
+        <div className="form-wrapper">
             <h4>Get started absolutely free.</h4>
             <p className="text-light">Enter your details below.</p>
             {this.renderError()}

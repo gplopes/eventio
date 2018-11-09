@@ -4,20 +4,20 @@ import classNames from "classnames";
 
 import "../styles/main.scss";
 
-
-
-const Page = ({ children, title, className, type }) => {
+const Page = ({ children, title, className, type, headerGap, fullScreen }) => {
+  const mainClasses = classNames(className, type, {
+    "header-gap": headerGap,
+    "full-screen": fullScreen
+  });
   return (
-    <main className={classNames(className, type)}>
+    <main className={mainClasses}>
       <Head>
         <title>{title}</title>
       </Head>
-      <div style={{ paddingTop: 100 }} />
       {children}
     </main>
   );
 };
-
 
 Page.Type = {
   light: "layout-light",
@@ -25,6 +25,8 @@ Page.Type = {
 };
 
 Page.defaultProps = {
+  headerGap: true,
+  fullScreen: false,
   type: Page.Type.white,
   title: "Page Title"
 };

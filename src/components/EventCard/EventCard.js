@@ -8,7 +8,7 @@ import "./EventCard.styles.scss";
 import beautifyDate from "../../utils/beautifyDate";
 
 import Icon from "../Icon/Icon";
-import ButtonWithState from "./components/EventCard.Button";
+import { ButtonWithState } from "../Button";
 
 function EventCard({
   user: { id },
@@ -19,11 +19,12 @@ function EventCard({
   attendees,
   description,
   size,
-  ...restProps
+  _id
 }) {
-  const buttonProps = { myId: id, ownerId: owner.id, attendees };
+  const buttonProps = { myId: id, ownerId: owner.id, attendees, eventId: _id };
+  const linkProps = { pathname: "/event", query: { id: _id } };
+
   const cardClasses = classNames("EventCard", { [size]: size !== "normal" });
-  const linkProps = { pathname: "/event", query: { id: restProps.id } };
   return (
     <div className={cardClasses}>
       <p className="EventCard-date">{beautifyDate(startsAt)}</p>

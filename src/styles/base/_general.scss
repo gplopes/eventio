@@ -8,7 +8,6 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-
 body {
   color: $colors-text;
   background-color: $colors-body-background;
@@ -18,13 +17,25 @@ body {
   margin: 0 auto;
   overflow-x: hidden;
 
-  // @include media($breakpoint-phablet) {
-  //   text-align: center;
-  // }
+  @include media($breakpoint-phablet) {
+    text-align: center;
+  }
 }
 
 main {
-  min-height: 100vh;
+  min-height: 100%;
+
+  &.header-gap {
+    padding-top: 120px;
+  }
+
+  &.full-screen {
+    min-height: 100vh;
+  }
+  @include media($breakpoint-mobile) {
+    padding-top: 90px !important;
+    min-height: auto !important;
+  }
 }
 
 body,

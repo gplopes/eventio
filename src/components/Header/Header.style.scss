@@ -16,6 +16,12 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  @include media($breakpoint-mobile) {
+    .Header-nonauth {
+      display: none;
+    }
+  }
 }
 
 .Header-nonauth {
@@ -27,9 +33,6 @@
     &:hover {
       color: $colors-blue-spruce;
     }
-  }
-  @include media($breakpoint-mobile) {
-    display: none;
   }
 }
 

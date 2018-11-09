@@ -49,14 +49,21 @@
     color: white;
     background-color: $colors-primary;
     &:hover {
-      background-color: darken($colors-primary, 5);
+      background-color: darken($colors-primary, 3);
     }
   }
   &-update {
     color: $colors-text;
     background-color: $colors-grey-light;
     &:hover {
-      background-color: darken($colors-grey-light, 2);
+      background-color: darken($colors-grey-light, 3);
+    }
+  }
+  &-alert {
+    color: white;
+    background-color: $colors-red-strawberry;
+    &:hover {
+      background-color: darken($colors-red-strawberry, 3);
     }
   }
 }

@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Icon from "../../Icon";
 import { constants, withContext } from "../List.settings";
 
+
 const renderItem = ({ name, type, activeFilter, toggleFilter }) => {
   const active = activeFilter == type;
   return (
@@ -25,6 +26,7 @@ class FilterMenu extends Component {
     isDesktop: true
   };
   componentDidMount() {
+    this.onResize();
     window.addEventListener("resize", this.onResize);
   }
   componentWillUnmount() {
@@ -33,8 +35,7 @@ class FilterMenu extends Component {
   onResize = () => {
     const isDesktop = window.innerWidth > 750;
     if (isDesktop === this.state.isDesktop) return false;
-    console.log("RESIZE", isDesktop, window.innerWidth);
-    this.setState({ isDesktop });
+    this.setState({ isDesktop, canRender: true });
   }
 
   toggleDropdown = () => {

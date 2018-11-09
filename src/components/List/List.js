@@ -48,6 +48,7 @@ export default class List extends PureComponent {
   state = {
     prevEvents: [],
     events: [],
+    hasLoaded: false,
     hasEvents: false,
     view: constants.GRID_VIEW,
     filter: constants.ALL_EVENTS
@@ -68,21 +69,27 @@ export default class List extends PureComponent {
   renderItem = event => {
     const { view } = this.state;
     const EventComponent = view === constants.GRID_VIEW ? EventCard : ListItem;
-    return <EventComponent key={event.id} {...event} />;
+    return (
+      <div className="col" key={event.id}>
+        <EventComponent {...event} />
+      </div>
+    );
   };
   renderList = () => {
     const { grid } = this.props;
     const { events, view } = this.state;
     const colSize = view === constants.LIST_VIEW ? 1 : grid;
     return (
-      <Section>
-        <div className={`cols-${colSize}`}>
-          <div className="col">{events.map(this.renderItem)}</div>
-        </div>
+      <Section className="List-items">
+        <div className={`cols-${colSize}`}>{events.map(this.renderItem)}</div>
       </Section>
     );
   };
-
+  renderMsg = () => {
+    const { hasLoaded } = this.props;
+    const msg = hasLoaded ? "No Events" : "Loading events"; 
+    return <NoEvent msg={msg} />
+  }
   render() {
     const { children } = this.props;
     const { hasEvents } = this.state;
@@ -94,7 +101,7 @@ export default class List extends PureComponent {
     return (
       <Provider value={providerValue}>
         <Section className="List">{children}</Section>
-        {hasEvents ? this.renderList() : <NoEvent />}
+        {hasEvents ? this.renderList() : this.renderMsg() }
       </Provider>
     );
   }
@@ -103,11 +110,13 @@ export default class List extends PureComponent {
 List.defaultProps = {
   grid: 3,
   title: null,
-  events: []
+  events: [],
+  hasLoaded: false,
 };
 
 List.propTypes = {
   grid: PropTypes.number,
   title: PropTypes.string,
+  hasLoaded: PropTypes.bool,
   events: PropTypes.arrayOf(PropTypes.object)
 };

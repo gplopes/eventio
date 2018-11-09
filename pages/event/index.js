@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Page from "../../src/layouts/Page";
 import { withConsumer } from "../../src/store";
-import getFullName from "../../src/utils/getFullName";
+import getUserName from "../../src/utils/getUserName";
 
 import EventForm from "../../src/components/EventForm/EventForm";
 import EventDetail from "../../src/components/EventDetail/EventDetail";
@@ -41,7 +41,7 @@ class Event extends Component {
       >
         <h3>Attendees</h3>
         {attendees.map(attendee => (
-          <TagName name={getFullName(attendee)} />
+          <TagName name={getUserName(attendee).initials} />
         ))}
       </div>
     );

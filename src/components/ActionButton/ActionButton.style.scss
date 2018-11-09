@@ -5,7 +5,7 @@
   cursor: pointer;
   width: 56px;
   height: 56px;
-  position: absolute;
+  position: fixed;
   bottom: 32px;
   right: 32px;
   display: flex;
@@ -13,9 +13,10 @@
   justify-content: center;
   border-radius: 50%;
   background-color: $colors-blue-spruce;
-  box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 6px 9px 0 rgba(53, 53, 53, 0.1);
   transition: transform 0.2s $easing-inOutBack;
+  animation: bounceInUp 0.7s $easing-inOutBack 0.5s backwards;
   &:hover {
-    transform: scale(1.05);
+    background-color: black;
   }
 }

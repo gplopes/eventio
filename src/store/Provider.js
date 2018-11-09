@@ -1,52 +1,66 @@
 import React, { Component } from "react";
+import cookies from "next-cookies";
 
+import { eventApi } from "../api";
 import Store from "./StoreContext";
 
-const dummyEvents = [
-  {
-    id: "58493db9691ecc0d3da51bfd",
-    title: "Awesome event",
-    description: "A bunch of people doing awesome stuff",
-    startsAt: "2016-12-08T10:46:33.901Z",
-    capacity: 50,
-    owner: {
-      id: "58493e0b691ecc0d3da51bfe",
-      firstName: "Robert",
-      lastName: "Rossmann",
-      email: "robert.rossmann@strv.com",
-      createdAt: "2016-12-08T10:46:33.901Z",
-      updatedAt: "2016-12-08T10:46:33.901Z"
-    },
-    attendees: [
-      {
-        id: "58493e0b691ecc0d3da51bfe",
-        firstName: "Robert",
-        lastName: "Rossmann",
-        email: "robert.rossmann@strv.com",
-        createdAt: "2016-12-08T10:46:33.901Z",
-        updatedAt: "2016-12-08T10:46:33.901Z"
-      }
-    ],
-    createdAt: "2016-12-08T10:46:33.901Z",
-    updatedAt: "2016-12-08T10:46:33.901Z"
-  }
-];
-
+const initialValue = {
+  events: [],
+  auth: false,
+  user: {}
+};
 export class Provider extends Component {
-  state = {
-    events: dummyEvents,
-    auth: false,
-    user: {
-      id: "58493e0b691ecc0d3da51bfe",
-      firstName: "Robert",
-      lastName: "Rossmann",
-      email: "robert.rossmann@strv.com",
-      createdAt: "2016-12-08T10:46:33.901Z",
-      updatedAt: "2016-12-08T10:46:33.901Z"
-    }
+  constructor() {
+    super();
+    this.state = {
+      ...initialValue
+    };
+
+    // Store Actions
+    this.actions = {
+      // User
+      isMe: this.isMe,
+      isAuth: this.isAuth,
+      setUser: this.setUser,
+      setLogout: this.setLogout,
+
+      // Events
+      joinEvent: this.joinEvent,
+      leaveEvent: this.leaveEvent,
+
+      editEvent: this.editEvent,
+      getEvent: this.getEvent,
+      myEvents: this.myEvents,
+      saveEvents: this.saveEvents
+    };
+  }
+
+  // USER ACTIONS
+  isMe = userId => this.state.user.id === userId;
+  isAuth = () => this.state.auth;
+  setUser = user => this.setState({ user, auth: true });
+  setLogout = () => {
+    this.setState(initialValue);
+    document.cookie = "refreshToken=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
   };
+  // EVENT ACTIONS
+  joinEvent = eventId => {
+    eventApi.joinEvent(eventId, this.state.user.token).then(this.getAllEvents)
+  };
+  leaveEvent = (eventId) => {
+    eventApi.leaveEvent(eventId, this.state.user.token).then(this.getAllEvents)
+  }
+
+  // Refresh Events List
+  getAllEvents = () => {
+    eventApi.allEvents().then(this.saveEvents);
+  }
+
 
   // Event Button State
+  saveEvents = events => {
+    this.setState({ events });
+  };
   editEvent = () => {
     console.log("EDIT BUTTON");
   };
@@ -60,18 +74,9 @@ export class Provider extends Component {
     const event = this.state.events.find(({ id }) => id === eventId);
     return event;
   };
-  isMe = userId => {
-    return user.id === userId;
-  };
   render() {
-    const actions = {
-      isMe: this.isMe,
-      editEvent: this.editEvent,
-      getEvent: this.getEvent,
-      myEvents: this.myEvents
-    };
     return (
-      <Store.Provider value={{ ...this.state, actions }}>
+      <Store.Provider value={{ ...this.state, actions: this.actions }}>
         {this.props.children}
       </Store.Provider>
     );

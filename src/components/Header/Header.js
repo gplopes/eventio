@@ -1,17 +1,28 @@
 import React from "react";
+import PropTypes from "prop-types";
+import Router from "next/router";
 
 import "./Header.style.scss";
 
 import { withConsumer } from "../../store";
 import Account from "../Account";
 import Logo from "./components/Logo";
-import { NonAuth } from './components/Messages';
+import { NonAuth } from "./components/Messages";
 
 function Header(props) {
-  const { lightLogo, centerItem, rightItem, auth, user } = props;
+  const { lightLogo, centerItem, auth, user, actions, hideAccount, rightItem } = props;
 
+  const setLogout = () => {
+    actions.setLogout();
+    Router.replace("/login");
+  };
   const renderRightItem = () => {
-    return auth ? <Account {...user} /> : <NonAuth />;
+    if (auth && !hideAccount) {
+      return <Account {...user} setLogout={setLogout} />;
+    } else if (React.isValidElement(rightItem)) {
+      return rightItem;
+    }
+    return null;
   };
   return (
     <header className="Header">
@@ -28,7 +39,16 @@ Header.defaultProps = {
   auth: false,
   lightLogo: false,
   rightItem: null,
+  hideAccount: false,
   centerItem: null
+};
+
+Header.propTypes = {
+  auth: PropTypes.bool,
+  lightLogo: PropTypes.bool,
+  hideAccount: PropTypes.bool,
+  //rightItem: PropTypes.node,
+  centerItem: PropTypes.node
 };
 
 export default withConsumer(Header);

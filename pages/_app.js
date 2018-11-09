@@ -1,8 +1,9 @@
 import App, { Container } from "next/app";
 import React from "react";
 
+import isAuth from "../src/auth/isAuth";
 import { Provider } from "../src/store";
-import Header from "../src/components/Header/Header";
+import Header from "../src/components/Header";
 
 class Eventio extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -12,13 +13,18 @@ class Eventio extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps };
+    const user = await isAuth(ctx);
+    return { pageProps, user };
+  }
+  componentDidMount() {
+    const { user } = this.props;
+    console.log("USER-->", user);
+    if (user) this.provider.setUser(user);
   }
   render() {
     const { Component, pageProps } = this.props;
-    //console.log('pageProps', pageProps);
     return (
-      <Provider>
+      <Provider ref={node => (this.provider = node)}>
         <Container>
           <Header {...pageProps.headerProps} />
           <Component {...pageProps} />
