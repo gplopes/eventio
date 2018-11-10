@@ -8,7 +8,7 @@
 
   ul {
     position: relative;
-    min-width: 162px;
+    min-width: 115px;
     padding: 6px 0;
     background-color: white;
     box-shadow: 0 1px 50px rgba(0, 0, 0, 0.05);
@@ -33,6 +33,7 @@
   }
   a {
     color: $colors-grey-chateau;
+    display: block;
     &:hover {
       color: $colors-text;
     }

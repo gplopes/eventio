@@ -22,11 +22,9 @@ const filterItem = type => data => {
   if (type === constants.ALL_EVENTS) return true;
 
   if (type === constants.FUTURE_EVENTS && today < eventDate) {
-    console.log("future");
     return true;
   }
   if (type === constants.PAST_EVENTS && today > eventDate) {
-    console.log("past");
     return true;
   }
   return false;
@@ -87,7 +85,7 @@ export default class List extends PureComponent {
   };
   renderMsg = () => {
     const { hasLoaded } = this.props;
-    const msg = hasLoaded ? "No Events" : "Loading events"; 
+    const msg = hasLoaded ? "No Events" : "Loading events";
     return <NoEvent msg={msg} />
   }
   render() {

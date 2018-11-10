@@ -3,33 +3,37 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import "./Button.styles.scss";
-import Icon from '../Icon/Icon';
+import Icon from "../Icon/Icon";
 
 function Button({ children, type, size, disabled, onClick, loading }) {
   const buttonClasses = classNames(
     "Button",
     `button-${type}`,
     `button-${size}`,
-    { disabled, loading }
+    { disabled: disabled || type === Button.Type.disable, loading }
   );
   return (
-    <button onClick={onClick} className={buttonClasses} disabled={disabled || loading}>
-      {loading ? <Icon type={Icon.Type.loading} /> : children }
+    <button
+      onClick={onClick}
+      className={buttonClasses}
+      disabled={disabled || loading || Button.Type.disable}
+    >
+      {loading ? <Icon type={Icon.Type.loading} /> : children}
     </button>
   );
 }
 
-
 Button.Type = {
   primary: "primary",
   update: "update",
-  alert: "alert"
+  alert: "alert",
+  disabled: "disabled"
 };
 
 Button.Size = {
-  small: 'small',
-  default: 'default',
-  big: 'big'
+  small: "small",
+  default: "default",
+  big: "big"
 };
 
 Button.defaultProps = {

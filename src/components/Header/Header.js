@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
 
@@ -7,10 +7,10 @@ import "./Header.style.scss";
 import { withConsumer } from "../../store";
 import Account from "../Account";
 import Logo from "./components/Logo";
-import { NonAuth } from "./components/Messages";
+//import { NonAuth } from "./components/Messages";
 
 function Header(props) {
-  const { lightLogo, centerItem, auth, user, actions, hideAccount, rightItem } = props;
+  const { lightLogo, centerItem, auth, user, actions, hideAccount, rightComponent } = props;
 
   const setLogout = () => {
     actions.setLogout();
@@ -19,10 +19,10 @@ function Header(props) {
   const renderRightItem = () => {
     if (auth && !hideAccount) {
       return <Account {...user} setLogout={setLogout} />;
-    } else if (React.isValidElement(rightItem)) {
-      return rightItem;
+    } else if (React.isValidElement(rightComponent)) {
+      return rightComponent;
     }
-    return null;
+    return null
   };
   return (
     <header className="Header">
@@ -38,7 +38,7 @@ function Header(props) {
 Header.defaultProps = {
   auth: false,
   lightLogo: false,
-  rightItem: null,
+  rightComponent: null,
   hideAccount: false,
   centerItem: null
 };
@@ -47,7 +47,7 @@ Header.propTypes = {
   auth: PropTypes.bool,
   lightLogo: PropTypes.bool,
   hideAccount: PropTypes.bool,
-  //rightItem: PropTypes.node,
+  rightComponent: PropTypes.element,
   centerItem: PropTypes.node
 };
 

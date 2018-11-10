@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import Link from "next/link";
 import Page from "../src/layouts/Page";
 
 import Banner from "../src/components/Banner/Banner";
@@ -9,14 +8,19 @@ import Button from "../src/components/Button/Button";
 import validateEmail from "../src/utils/validateEmail";
 import validatePassword from "../src/utils/validatePassword";
 
+// Page Config
+const pageProps = {
+  name: "SignUp",
+  title: "Eventio | Create your own account for free",
+  fullScreen: true,
+  headerGap: false
+};
+
+
 class SignUp extends PureComponent {
-  static async getInitialProps() {
-    return {
-      headerProps: {
-        lightLogo: true
-      }
-    };
-  }
+  static headerProps = {
+    lightLogo: true
+  };
   constructor() {
     super();
     this.state = {
@@ -98,7 +102,7 @@ class SignUp extends PureComponent {
     const { isSubmitting } = this.state;
 
     return (
-      <Page className="SignUp flex" fullScreen>
+      <Page {...pageProps}>
         <Banner />
         <section className="centered-content">
         <div className="form-wrapper">

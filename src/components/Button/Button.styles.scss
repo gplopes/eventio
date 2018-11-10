@@ -14,7 +14,7 @@
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 0;
   cursor: pointer;
   box-sizing: border-box;
@@ -22,7 +22,10 @@
 
   &.loading {
     pointer-events:none;
-    cursor: default;
+    cursor: auto;
+  }
+  &:disabled {
+    cursor: auto;
   }
 
   .Icon {
@@ -53,10 +56,10 @@
     }
   }
   &-update {
-    color: $colors-text;
-    background-color: $colors-grey-light;
+    color: $colors-grey-aluminium;
+    background-color: $colors-grey-mischka;
     &:hover {
-      background-color: darken($colors-grey-light, 3);
+      background-color: darken($colors-grey-mischka, 3);
     }
   }
   &-alert {
@@ -65,5 +68,11 @@
     &:hover {
       background-color: darken($colors-red-strawberry, 3);
     }
+  }
+  &-disabled {
+    opacity: 0.5;
+    cursor: auto;
+    color: $colors-grey-aluminium;
+    background-color: $colors-grey-mischka;
   }
 }

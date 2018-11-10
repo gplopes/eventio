@@ -15,7 +15,10 @@
 }
 
 .icon-eye {
-  background-image: url("/static/icon/icon-show.svg");
+  background-image: url("/static/icon/icon-eye.svg");
+  &.active {
+    background-image: url("/static/icon/icon-eye-dark.svg");
+  }
 }
 
 .icon-arrow {
@@ -45,7 +48,6 @@
 .icon-plus {
   background-image: url("/static/icon/icon-plus.svg");
 }
-
 
 .icon-grid {
   background-image: url("/static/icon/icon-grid.svg");

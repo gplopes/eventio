@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import Link from "next/link";
 
 import "./Account.style.scss";
 
 import Avatar from "../Avatar";
+import getUserName from "../../utils/getUserName";
 
 function Dropdown({ isOpen = false, setLogout }) {
   return (
@@ -15,7 +17,9 @@ function Dropdown({ isOpen = false, setLogout }) {
             <a>Profile</a>
           </Link>
         </li>
-        <li onClick={setLogout}>Logout</li>
+        <li>
+          <a onClick={setLogout}>Logout</a>
+        </li>
       </ul>
     </div>
   );
@@ -33,8 +37,8 @@ class Account extends PureComponent {
   };
   render() {
     const { firstName, lastName, setLogout } = this.props;
-    const initials = firstName[0] + lastName[0];
-    const fullName = `${firstName} ${lastName}`;
+    const { fullName, initials } = getUserName({ firstName, lastName });
+
     return (
       <div className="Account" onClick={this.open} onMouseLeave={this.close}>
         <Avatar initials={initials} />

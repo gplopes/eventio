@@ -57,6 +57,10 @@ section {
     display: none;
   }
 
+  .form-inputs {
+    margin-top: 50px;
+  }
+
   @include media($breakpoint-mobile) {
     margin-top: 0;
 

@@ -18,7 +18,6 @@ class Eventio extends App {
   }
   componentDidMount() {
     const { user } = this.props;
-    console.log("USER-->", user);
     if (user) this.provider.setUser(user);
   }
   render() {
@@ -26,7 +25,7 @@ class Eventio extends App {
     return (
       <Provider ref={node => (this.provider = node)}>
         <Container>
-          <Header {...pageProps.headerProps} />
+          <Header {...Component.headerProps} />
           <Component {...pageProps} />
         </Container>
       </Provider>

@@ -1,5 +1,7 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Router from "next/router";
+import classNames from "classnames";
 import Page from "../src/layouts/Page";
 
 import { authApi, getErrorMsg } from "../src/api";
@@ -13,17 +15,31 @@ import { NonAuth } from "../src/components/Header";
 // Utils
 import validateEmail from "../src/utils/validateEmail";
 
-const PAGE_TITLE = "Eventio | STRV";
+// Page Config
+const pageProps = {
+  name: "Login",
+  title: "Eventio | STRV",
+  fullScreen: true,
+  headerGap: false
+};
+
 const INVALID_INPUTS =
   "Oops! That email and password combination is not valid.";
 
-class SignIn extends PureComponent {
+
+class Login extends Component {
+  // Global Header
+  static headerProps = {
+    lightLogo: true,
+    rightComponent: <NonAuth />,
+  };
   constructor() {
     super();
 
     this.state = {
       isSubmitting: false,
       hasError: false,
+      pwdType: "password",
       errorMsg: ""
     };
 
@@ -34,29 +50,26 @@ class SignIn extends PureComponent {
       errorMsg: "Wrong email address",
       validator: validateEmail
     };
-
-    // Input: Password Props
-    this.passwordProps = {
-      ref: node => (this.password = node),
-      label: "Password",
-      type: "password",
-      icon: true,
-      iconType: TextInput.Icon.eye
-    };
   }
 
-  handleSubmit = () => {
+  // Toggle
+  togglePwdInputType = () => {
+    const pwdType = this.state.pwdType === "password" ? "text" : "password";
+    this.setState({ pwdType });
+  };
+  // Handlers
+  submitHandler = () => {
     // Input Validation Check
     if (!this.email.isValid() || !this.password.isValid()) {
       this.setState({ hasError: true, errorMsg: INVALID_INPUTS });
       return false;
     }
 
-    //
     this.setState({ isSubmitting: true, hasError: false });
-    this.handleAuth();
+    this.authHandler();
   };
-  handleAuth = () => {
+
+  authHandler = () => {
     const email = this.email.getVal();
     const password = this.password.getVal();
 
@@ -64,10 +77,9 @@ class SignIn extends PureComponent {
       .login(email, password)
       .then(data => {
         this.props.actions.setUser(data.user);
-        Router.replace("/");
+        Router.replace("/dashboard");
       })
       .catch(error => {
-        console.log("ERROR???", error);
         this.setState({
           isSubmitting: false,
           hasError: true,
@@ -76,26 +88,39 @@ class SignIn extends PureComponent {
       });
   };
 
+  // Renders
   renderError() {
     const { hasError, errorMsg } = this.state;
     return hasError && <p className="text-alert">{errorMsg}</p>;
   }
   render() {
-    const { isSubmitting } = this.state;
+    const { isSubmitting, pwdType } = this.state;
 
+    // Input: Password Props (dynamic changes)
+    const passwordProps = {
+      ref: node => (this.password = node),
+      type: pwdType,
+      label: "Password",
+      icon: true,
+      iconProps: {
+        className: classNames({ active: this.state.pwdType === "text" }),
+        type: TextInput.Icon.eye,
+        onClick: this.togglePwdInputType
+      }
+    };
     return (
-      <Page className="SignIn flex" title={PAGE_TITLE} fullScreen>
+      <Page {...pageProps}>
         <Banner />
         <section className="centered-content">
           <div className="form-wrapper">
             <h4>Sign in to Eventio.</h4>
             <p className="text-light">Enter your details below.</p>
             {this.renderError()}
-            <div className="SignIn-form" style={{ marginTop: 50 }}>
+            <div className="form-inputs">
               <TextInput {...this.emailProps} />
-              <TextInput {...this.passwordProps} />
+              <TextInput {...passwordProps} />
               <NonAuth />
-              <Button onClick={this.handleSubmit} loading={isSubmitting}>
+              <Button onClick={this.submitHandler} loading={isSubmitting}>
                 Sign In
               </Button>
             </div>
@@ -106,13 +131,10 @@ class SignIn extends PureComponent {
   }
 }
 
-SignIn.getInitialProps = () => {
-  return {
-    headerProps: {
-      lightLogo: true,
-      rightItem: <NonAuth />
-    }
-  };
+Login.propTypes = {
+  actions: PropTypes.shape({
+    setUser: PropTypes.func.isRequired
+  }).isRequired
 };
 
-export default withConsumer(SignIn);
+export default withConsumer(Login);

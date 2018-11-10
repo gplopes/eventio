@@ -40,10 +40,12 @@ async function isAuth(ctx) {
     // WITH TOKEN
     try {
       const user = await authApi.refreshToken(c.refreshToken);
-      console.log(user);
-      const hasUser = !!user.data;
-      if (ctx.pathname == "/") handleRootEntry(ctx, hasUser);
-      else if (ctx.pathname == "/login") handleLoginEntry(ctx, hasUser);
+      if (
+        ctx.pathname == "/" ||
+        ctx.pathname == "/login" ||
+        ctx.pathname == "/signup"
+      )
+        goDashboard(ctx);
 
       // Return Data to the app
       const token = user.headers["authorization"];

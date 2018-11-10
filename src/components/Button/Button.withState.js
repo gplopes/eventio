@@ -5,7 +5,7 @@ import { withConsumer } from "../../store";
 
 import Button from "./Button";
 
-const buttonStates = ({ ownerId, myId, attendees, actions }) => {
+const buttonStates = ({ ownerId, myId, attendees, actions, capacity }) => {
   const state = {
     edit: {
       type: Button.Type.update,
@@ -25,22 +25,31 @@ const buttonStates = ({ ownerId, myId, attendees, actions }) => {
       type: Button.Type.primary,
       text: "join",
       action: actions.joinEvent
+    },
+    full: {
+      type: Button.Type.disabled,
+      text: "Full",
+      action: () => {},
     }
   };
 
-  // Creator
+  // I am the Creator
   if (ownerId === myId) return state.edit;
 
-  // Joined
+  // I am on the event
   const amIAttendee = attendees.find(attendee => attendee.id === myId);
   if (amIAttendee) return state.leave;
 
-  // Not in the event
+  // Event Is Full
+  if (attendees.length >= capacity) return state.full;
+
+
+  // I am not on the event
   return state.join;
 };
 
-function ButtonWithState({ myId, ownerId, attendees, actions, eventId }) {
-  const buttonInfo = buttonStates({ myId, ownerId, attendees, actions });
+function ButtonWithState({ myId, ownerId, attendees, actions, eventId, capacity }) {
+  const buttonInfo = buttonStates({ myId, ownerId, attendees, actions, capacity });
   return (
     <Button
       onClick={() => buttonInfo.action(eventId)}

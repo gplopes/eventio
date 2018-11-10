@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Link from "next/link";
 
-import { withConsumer } from "../../store";
 import "./EventCard.styles.scss";
+
+import { withConsumer } from "../../store";
 import beautifyDate from "../../utils/beautifyDate";
 
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 import { ButtonWithState } from "../Button";
 
 function EventCard({
@@ -21,7 +22,14 @@ function EventCard({
   size,
   _id
 }) {
-  const buttonProps = { myId: id, ownerId: owner.id, attendees, eventId: _id };
+
+  const buttonProps = {
+    myId: id,
+    ownerId: owner.id,
+    attendees,
+    capacity,
+    eventId: _id
+  };
   const linkProps = { pathname: "/event", query: { id: _id } };
 
   const cardClasses = classNames("EventCard", { [size]: size !== "normal" });
