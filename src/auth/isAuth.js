@@ -50,9 +50,10 @@ async function isAuth(ctx) {
       const token = user.headers["authorization"];
       return { ...user.data, token };
     } catch (err) {
-      console.log("Hello");
+      if (ctx.pathname !== "/login" && ctx.pathname !== "/signup") {
+        goLogin(ctx);
+      }
       return false;
-      //goLogin(ctx);
     }
   }
 }

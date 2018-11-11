@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React  from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Link from "next/link";
@@ -12,61 +12,59 @@ import trim from "../../utils/trim";
 import Icon from "../Icon";
 import { ButtonWithState } from "../Button";
 
-class EventCard extends PureComponent {
-  render() {
-    const {
-      user: { id },
-      startsAt,
-      title,
-      owner,
-      capacity,
-      attendees,
-      description,
-      size,
-      trimDesc,
-      _id
-    } = this.props;
+function EventCard(props) {
+  const {
+    user: { id },
+    startsAt,
+    title,
+    owner,
+    capacity,
+    attendees,
+    description,
+    size,
+    trimDesc,
+    _id
+  } = props;
 
-    const buttonProps = {
-      myId: id,
-      ownerId: owner.id,
-      attendees,
-      capacity,
-      eventId: _id,
-      actionCallback: () => { }
-    };
+  const buttonProps = {
+    myId: id,
+    ownerId: owner.id,
+    attendees,
+    capacity,
+    eventId: _id,
+    actionCallback: () => {}
+  };
 
-    const linkProps = { pathname: "/event", query: { id: _id } };
+  const linkProps = { pathname: "/event", query: { id: _id } };
 
-    const eventDesc = trimDesc ? trim(description, 100) : description;
-    const cardClasses = classNames("EventCard", { [size]: size !== "normal" });
+  const eventDesc = trimDesc ? trim(description, 100) : description;
+  const cardClasses = classNames("EventCard", { [size]: size !== "normal" });
 
-    return (
-        <div className={cardClasses}>
-          <p className="EventCard-date">{beautifyDate(startsAt)}</p>
-          <Link href={linkProps}>
-            <a className="EventCard-Link">
-              <div className="EventCard-about">
-                <h5>{title}</h5>
-                <p>
-                  {owner.firstName} {owner.lastName}
-                </p>
-              </div>
-              <p className="EventCard-desc">{eventDesc}</p>
-            </a>
-          </Link>
-          <div className="EventCard-footer flex-row">
-            <div className="EventCard-attendees flex-row">
-              <Icon type={Icon.Type.user} />
-              <span>
-                {attendees.length} of {capacity}
-              </span>
-            </div>
-            <ButtonWithState {...buttonProps} />
+  return (
+    <div className={cardClasses}>
+      <p className="EventCard-date">{beautifyDate(startsAt)}</p>
+      <Link href={linkProps}>
+        <a className="EventCard-Link">
+          <div className="EventCard-about">
+            <h5>{title}</h5>
+            <p>
+              {owner.firstName} {owner.lastName}
+            </p>
           </div>
+          <p className="EventCard-desc">{eventDesc}</p>
+        </a>
+      </Link>
+      <div className="EventCard-footer flex-row">
+        <div className="EventCard-attendees flex-row">
+          <Icon type={Icon.Type.user} />
+          <span>
+            {attendees.length} of {capacity}
+          </span>
         </div>
-    );
-  }
+        <ButtonWithState {...buttonProps} />
+      </div>
+    </div>
+  );
 }
 
 EventCard.defaultProps = {
@@ -93,4 +91,6 @@ EventCard.propTypes = {
   }).isRequired
 };
 
-export default withConsumer(EventCard);
+EventCard.displayName = 'EventCard';
+
+export default withConsumer(React.memo(EventCard));

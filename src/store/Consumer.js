@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
+import getDisplayName from '../utils/getDisplayName';
 import Store from "./StoreContext";
 
 export function withConsumer(WrappedComponent) {
@@ -15,6 +16,7 @@ export function withConsumer(WrappedComponent) {
       );
     }
   }
+  Consumer.displayName = `withConsumer(${getDisplayName(WrappedComponent)})`;
   hoistNonReactStatics(Consumer, WrappedComponent);
   return Consumer;
 }
