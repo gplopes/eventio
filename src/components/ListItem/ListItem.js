@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import Link from "next/link";
 
 import "./ListItem.styles.scss";
 
@@ -8,18 +9,21 @@ import trim from "../../utils/trim";
 import beautifyDate from "../../utils/beautifyDate";
 import { ButtonWithState } from "../Button";
 
-function Desc({ title, description }) {
+function Desc({ title, description, eventId }) {
+  const linkProps = { pathname: "/event", query: { id: eventId } };
   return (
-    <div className="flex-row ListItem-wrap">
-      <h6 className="strong">{title}</h6>
-      <p className="ListItem-desc">{trim(description, 31)}</p>
-    </div>
+    <Link href={linkProps}>
+      <a className="flex-row ListItem-wrap">
+        <h6 className="strong">{title}</h6>
+        <p className="ListItem-desc">{trim(description, 31)}</p>
+      </a>
+    </Link>
   );
 }
 
 function Info({ startsAt, attendees, capacity, owner }) {
   return (
-    <div className="flex-row" style={{flex: 1}}>
+    <div className="flex-row" style={{ flex: 1 }}>
       <p className="ListItem-owner">
         {owner.firstName} {owner.lastName}
       </p>
@@ -45,7 +49,7 @@ function ListItem({
   return (
     <div className="ListItem flex-row">
       <div className="ListItem-event flex-row">
-        <Desc title={title} description={description} />
+        <Desc title={title} description={description} eventId={_id} />
         <div className="flex-row ListItem-info">
           <Info
             owner={owner}

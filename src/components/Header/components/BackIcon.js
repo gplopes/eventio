@@ -5,9 +5,9 @@ import Icon from "../../Icon";
 export function BackIcon({ name, href = "/" }) {
   return (
     <Link href={href}>
-      <a className="flex-row">
+      <a className="Header-button flex-row">
         <Icon type={Icon.Type.back} />
-        <span>{name}</span>
+        <p>{name}</p>
       </a>
     </Link>
   );

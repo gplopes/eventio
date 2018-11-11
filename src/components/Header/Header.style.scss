@@ -37,12 +37,14 @@
 }
 
 .Header-button {
-  border: 1px solid red;
   color: $colors-blue-spruce;
   font-weight: $weight-semibold;
   font-size: $font-size-small;
   line-height: $font-size-small;
   text-transform: uppercase;
+  p {
+    margin-top: 4px;
+  }
 }
 
 .Logo {

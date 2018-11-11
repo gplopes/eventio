@@ -84,10 +84,8 @@ class SignUp extends PureComponent {
       isFirstNameValid &&
       isLastNameValid
     ) {
-      console.log("all valid");
       this.setState({ isSubmitting: true, hasError: false });
     }
-
   };
   renderError() {
     const { hasError } = this.state;

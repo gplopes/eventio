@@ -67,13 +67,17 @@ export class Provider extends Component {
   };
   getEvent = eventId => {
     const event = this.state.events.find(({ id }) => id === eventId);
-    if (event) return new Promise(accept => accept(event));
+    if (event) return new Promise(accept => accept({ event }));
 
     return eventApi.getEvent(eventId);
   };
 
   createEvent = newEvent => {
     return eventApi.createEvent(newEvent, this.state.user.token);
+  };
+
+  saveEvents = events => {
+    this.setState({ events });
   };
 
   // Private
@@ -89,13 +93,8 @@ export class Provider extends Component {
     return myEvents || [];
   };
 
-  // Event Button State
-  saveEvents = events => {
-    this.setState({ events });
-  };
-  editEvent = () => {
-    console.log("EDIT BUTTON");
-  };
+  // TODO
+  editEvent = () => {};
 
   render() {
     return (

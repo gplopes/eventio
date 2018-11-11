@@ -91,18 +91,12 @@ function Login() {
 }
 ```
 
-## Extra npm extra commands
+## Test
 
-1. Run Prettier Formatter
-
-```
-> npm run prettier
-```
-
-2. Run Test
+Test still needs to be written, the jest is already plugged on the project.
 
 ```
-> npm run jest
+> npm test
 ```
 
 ## Release
@@ -130,10 +124,6 @@ connect to the api and do the correct redirection
 status: a few components done, it can display the event but
 edit option needs work
 
-### Test
+### Handle Better Preload Image
 
-Test still needs to be written, the jest is already plugged on the project.
-
-```
-> npm test
-```
+to give better 'feedback' to the user using the site for the first

@@ -32,7 +32,7 @@ class Event extends PureComponent {
   componentDidMount() {
     if (!this.props.eventId) return false;
 
-    this.props.actions.getEvent(this.props.eventId).then(({event}) => {
+    this.props.actions.getEvent(this.props.eventId).then(({ event }) => {
       this.setState({ event, hasLoaded: true });
     });
   }
@@ -41,7 +41,7 @@ class Event extends PureComponent {
     return (
       <div
         className="Event-attendees card"
-        style={{ width: `${colAttendeesSize}%` }}
+        style={{ width: `calc(${colAttendeesSize}% - 15px)` }}
       >
         <h3>Attendees</h3>
         {attendees.map(attendee => (
