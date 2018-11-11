@@ -1,33 +1,24 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Router from "next/router";
 import { Page, Section } from "../../src/layouts";
+
+import { validateCapacity, validateDate } from "../../src/utils/validates";
+import { withConsumer } from "../../src/store";
 
 import CloseButton from "../../src/components/Header/components/CloseButon";
 import Button from "../../src/components/Button";
 import TextInput from "../../src/components/TextInput";
 
-// Helpers
-const validateCapacity = value => {
-  return {
-    valid: value > 1,
-    error: "You can be all alone on the event"
-  };
-};
-
-const validateDate = value => {
-  const now = new Date();
-  const inputDate = new Date(value);
-  return {
-    valid: inputDate < now,
-    error: "We haven't invented time machine yet :)"
-  };
-};
-
 // Page Config
 const pageProps = {
-  name: "Create Event"
+  name: "CreateEvent",
+  className: "centered-content",
+  fullScreen: true,
+  headerGap: false
 };
 
-export default class CreateEvent extends Component {
+class CreateEvent extends Component {
   static headerProps = {
     hideAccount: true,
     rightComponent: <CloseButton />
@@ -36,7 +27,8 @@ export default class CreateEvent extends Component {
     super();
 
     this.state = {
-      isSubmitting: false
+      isSubmitting: false,
+      buttonName: "Create new event"
     };
 
     this.titleProps = {
@@ -88,20 +80,30 @@ export default class CreateEvent extends Component {
       isTimeValid &&
       isCapacityValid
     ) {
-      console.log("All are valid");
-    }
+      this.setState({ isSubmitting: true });
+      const date = new Date(this.date.getVal());
+      const time = this.time.getVal().split(":"); // HH:MM
 
-    const eventPayload = {
-      title: this.title.getVal(),
-      desc: this.desc.getVal(),
-      date: this.time.getVal(),
-      time: this.time.getVal(),
-      capacity: this.capacity.getVal()
-    };
-    //console.log("PAYLOAD", eventPayload);
+      date.setHours(time[0], time[1]);
+      const dateISO = date.toISOString();
+
+      const newEvent = {
+        title: this.title.getVal(),
+        description: this.desc.getVal(),
+        startsAt: dateISO,
+        capacity: this.capacity.getVal()
+      };
+
+      this.props.actions.createEvent(newEvent).then(({ event }) => {
+        this.setState({ buttonName: "Event created :)" });
+        this.redirect = setTimeout(() => {
+          Router.push({ pathname: "/event", query: { id: event.id }});
+        }, 2000);
+      });
+    }
   };
   render() {
-    const { isSubmitting } = this.state;
+    const { isSubmitting, buttonName } = this.state;
 
     return (
       <Page {...pageProps}>
@@ -116,7 +118,7 @@ export default class CreateEvent extends Component {
             <TextInput {...this.capacityProps} />
 
             <Button onClick={this.submitHandler} loading={isSubmitting}>
-              Create new event
+              {buttonName}
             </Button>
           </div>
         </Section>
@@ -124,3 +126,11 @@ export default class CreateEvent extends Component {
     );
   }
 }
+
+CreateEvent.propTypes = {
+  actions: PropTypes.shape({
+    createEvent: PropTypes.func.isRequired
+  }).isRequired
+};
+
+export default withConsumer(CreateEvent);

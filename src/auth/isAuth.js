@@ -1,7 +1,6 @@
 import cookies from "next-cookies";
-import isNull from "lodash/isNull";
 import redirectTo from "../lib/redirectTo";
-import authApi from "../api/authApi";
+import userApi from "../api/userApi";
 
 const goLogin = ctx => redirectTo("/login", { res: ctx.res, status: 301 });
 const goDashboard = ctx =>
@@ -39,7 +38,7 @@ async function isAuth(ctx) {
   } else {
     // WITH TOKEN
     try {
-      const user = await authApi.refreshToken(c.refreshToken);
+      const user = await userApi.refreshToken(c.refreshToken);
       if (
         ctx.pathname == "/" ||
         ctx.pathname == "/login" ||

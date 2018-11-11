@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Link from "next/link";
 import isEqual from "lodash/isEqual";
 
 import "./List.style.scss";
@@ -11,24 +10,11 @@ import EventCard from "../EventCard/EventCard";
 import ListItem from "../ListItem/ListItem";
 
 // Config
-import { Provider, constants } from "./List.settings";
+import { Provider, constants, filterItem } from "./List.settings";
 import FilterMenu from "./components/FilterMenu";
 import ToggleLayout from "./components/ToggleLayout";
 import NoEvent from "./components/NoEvent";
 
-const filterItem = type => data => {
-  const today = new Date();
-  const eventDate = new Date(data.startsAt);
-  if (type === constants.ALL_EVENTS) return true;
-
-  if (type === constants.FUTURE_EVENTS && today < eventDate) {
-    return true;
-  }
-  if (type === constants.PAST_EVENTS && today > eventDate) {
-    return true;
-  }
-  return false;
-};
 
 export default class List extends PureComponent {
   // Inner Components
@@ -40,7 +26,7 @@ export default class List extends PureComponent {
     return {
       hasEvents: props.events.length > 0,
       prevEvents: props.events,
-      events: props.events.filter(filterItem(constants.ALL_EVENTS))
+      events: props.events.filter(filterItem(constants.FUTURE_EVENTS))
     };
   }
   state = {
@@ -49,7 +35,7 @@ export default class List extends PureComponent {
     hasLoaded: false,
     hasEvents: false,
     view: constants.GRID_VIEW,
-    filter: constants.ALL_EVENTS
+    filter: constants.FUTURE_EVENTS
   };
   toggleView = view => {
     this.setState({ view });
@@ -69,7 +55,7 @@ export default class List extends PureComponent {
     const EventComponent = view === constants.GRID_VIEW ? EventCard : ListItem;
     return (
       <div className="col" key={event.id}>
-        <EventComponent {...event} />
+        <EventComponent {...event} trimDesc />
       </div>
     );
   };

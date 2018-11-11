@@ -18,7 +18,7 @@ function Banner({ quote, author, backgroundImg }) {
 }
 
 Banner.defaultProps = {
-  backgroundImg: "./static/intro-bg.png",
+  backgroundImg: "/static/intro-bg.png",
   quote: "“Great, kid. Don’t get cocky.”",
   author: "Han Solo"
 };

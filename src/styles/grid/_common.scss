@@ -53,7 +53,7 @@ section {
     margin-top: 30px;
   }
 
-  .Header-nonauth {
+  .Header-msg {
     display: none;
   }
 
@@ -64,8 +64,19 @@ section {
   @include media($breakpoint-mobile) {
     margin-top: 0;
 
-    .Header-nonauth {
+    .Header-msg {
       display: block;
     }
+  }
+}
+
+// 
+.trooper-bg {
+  background-image: url('/static/helmet-light.svg');
+  background-repeat: no-repeat;
+  background-position: -20% center;
+  background-size: 400px;
+  @include media($breakpoint-tablet-ls) {
+    background: none;
   }
 }

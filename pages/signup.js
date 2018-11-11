@@ -1,25 +1,25 @@
 import React, { PureComponent } from "react";
 import Page from "../src/layouts/Page";
 
-import Banner from "../src/components/Banner/Banner";
-import TextInput from "../src/components/TextInput/TextInput";
-import Button from "../src/components/Button/Button";
+import Banner from "../src/components/Banner";
+import TextInput from "../src/components/TextInput";
+import Button from "../src/components/Button";
 
-import validateEmail from "../src/utils/validateEmail";
-import validatePassword from "../src/utils/validatePassword";
+import { HaveAccount } from "../src/components/Header";
+import { validateEmail, validatePassword } from "../src/utils/validates";
 
 // Page Config
 const pageProps = {
   name: "SignUp",
-  title: "Eventio | Create your own account for free",
+  title: "Create your own account for free",
   fullScreen: true,
   headerGap: false
 };
 
-
 class SignUp extends PureComponent {
   static headerProps = {
-    lightLogo: true
+    lightLogo: true,
+    rightComponent: <HaveAccount />
   };
   constructor() {
     super();
@@ -30,63 +30,64 @@ class SignUp extends PureComponent {
 
     this.firstNameProps = {
       ref: node => (this.firstName = node),
-      label: "First name"
+      label: "First name",
+      required: true
     };
 
     this.lastNameProps = {
       ref: node => (this.lastName = node),
-      label: "Last name"
+      label: "Last name",
+      required: true
     };
 
     this.emailProps = {
       ref: node => (this.email = node),
       label: "Email",
-      errorMsg: "Wrong email address",
-      validator: validateEmail
+      validator: validateEmail,
+      required: true
     };
 
     this.passwordProps = {
       ref: node => (this.password = node),
       label: "Password",
       type: "password",
-      icon: true,
-      //validator: this.checkPassword,
-      iconType: TextInput.Icon.eye
+      required: true
     };
 
     this.passwordRepeatProps = {
       ...this.passwordProps,
       ref: node => (this.repeatPassword = node),
-      validator: this.checkRepeatPassword,
-      errorMsg: "Passwords are not matching",
       label: "Repeat Password",
-      type: "password"
+      validator: this.checkRepeatPassword
     };
   }
   checkPassword = password => {
-    const repeatPassword = this.repeatPassword.getVal().value;
+    const repeatPassword = this.repeatPassword.getVal();
     return validatePassword(password, repeatPassword);
   };
   checkRepeatPassword = repeatPassword => {
-    const password = this.password.getVal().value;
+    const password = this.password.getVal();
     return validatePassword(password, repeatPassword);
   };
-  handleSubmit = () => {
+  submitHandler = () => {
     // Checker
-    const email = this.email.getVal();
-    const password = this.password.getVal().value;
-    const repeatPassword = this.repeatPassword.getVal().value;
+    const isEmailValid = this.email.isValid();
+    const isPasswordValid = this.password.isValid();
+    const isRepeatPasswordValid = this.repeatPassword.isValid();
+    const isFirstNameValid = this.firstName.isValid();
+    const isLastNameValid = this.lastName.isValid();
 
-    // No check
-    const name = this.name.getVal().value;
-    const lastName = this.lastName.getVal().value;
-
-    if (!email.isValid || repeatPassword !== password) {
-      this.setState({ hasError: true });
-      return false;
+    if (
+      isEmailValid &&
+      isPasswordValid &&
+      isRepeatPasswordValid &&
+      isFirstNameValid &&
+      isLastNameValid
+    ) {
+      console.log("all valid");
+      this.setState({ isSubmitting: true, hasError: false });
     }
 
-    this.setState({ isSubmitting: true, hasError: true });
   };
   renderError() {
     const { hasError } = this.state;
@@ -105,17 +106,17 @@ class SignUp extends PureComponent {
       <Page {...pageProps}>
         <Banner />
         <section className="centered-content">
-        <div className="form-wrapper">
+          <div className="form-wrapper">
             <h4>Get started absolutely free.</h4>
             <p className="text-light">Enter your details below.</p>
             {this.renderError()}
-            <div className="SignIn-form" style={{ marginTop: 50 }}>
+            <div className="SignIn-form">
               <TextInput {...this.firstNameProps} />
               <TextInput {...this.lastNameProps} />
               <TextInput {...this.emailProps} />
               <TextInput {...this.passwordProps} />
               <TextInput {...this.passwordRepeatProps} />
-              <Button onClick={this.handleSubmit} loading={isSubmitting}>
+              <Button onClick={this.submitHandler} loading={isSubmitting}>
                 Sign Up
               </Button>
             </div>

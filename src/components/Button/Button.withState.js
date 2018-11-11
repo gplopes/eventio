@@ -10,7 +10,7 @@ const buttonStates = ({ ownerId, myId, attendees, actions, capacity }) => {
     edit: {
       type: Button.Type.update,
       text: "edit",
-      action: (eventId) =>
+      action: eventId =>
         Router.push({
           pathname: "/event",
           query: { id: eventId, edit: true }
@@ -29,7 +29,7 @@ const buttonStates = ({ ownerId, myId, attendees, actions, capacity }) => {
     full: {
       type: Button.Type.disabled,
       text: "Full",
-      action: () => {},
+      action: () => {}
     }
   };
 
@@ -43,16 +43,29 @@ const buttonStates = ({ ownerId, myId, attendees, actions, capacity }) => {
   // Event Is Full
   if (attendees.length >= capacity) return state.full;
 
-
   // I am not on the event
   return state.join;
 };
 
-function ButtonWithState({ myId, ownerId, attendees, actions, eventId, capacity }) {
-  const buttonInfo = buttonStates({ myId, ownerId, attendees, actions, capacity });
+function ButtonWithState({
+  myId,
+  ownerId,
+  attendees,
+  actions,
+  eventId,
+  capacity,
+  actionCallback
+}) {
+  const buttonInfo = buttonStates({
+    myId,
+    ownerId,
+    attendees,
+    actions,
+    capacity
+  });
   return (
     <Button
-      onClick={() => buttonInfo.action(eventId)}
+      onClick={() => buttonInfo.action(eventId).then(actionCallback)}
       type={buttonInfo.type}
       size="small"
     >
@@ -60,5 +73,9 @@ function ButtonWithState({ myId, ownerId, attendees, actions, eventId, capacity 
     </Button>
   );
 }
+
+ButtonWithState.defaultProps = {
+  actionCallback: () => {}
+};
 
 export default withConsumer(ButtonWithState);

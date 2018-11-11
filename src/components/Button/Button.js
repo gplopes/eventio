@@ -27,7 +27,8 @@ Button.Type = {
   primary: "primary",
   update: "update",
   alert: "alert",
-  disabled: "disabled"
+  disabled: "disabled",
+  dark: "dark"
 };
 
 Button.Size = {

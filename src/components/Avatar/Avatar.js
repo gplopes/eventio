@@ -8,7 +8,7 @@ function Avatar({ image, initials, size }) {
   const avatarBg = image ? { backgroundImage: `url(${image})` } : null;
   return (
     <div className={classNames("Avatar", size)} style={avatarBg}>
-      {!image && <p>{initials}</p>}
+      {!image && initials && <p>{initials}</p>}
     </div>
   );
 }

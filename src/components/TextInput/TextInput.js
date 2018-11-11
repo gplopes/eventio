@@ -53,7 +53,8 @@ class TextInput extends PureComponent {
 
     // Return Status
     if (required) return validator.valid && hasContent;
-    else return validator.valid || hasContent;
+    else if (!hasContent) return true;
+    else return validator.valid;
   };
 
   // Handlers:

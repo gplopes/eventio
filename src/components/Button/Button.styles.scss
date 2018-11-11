@@ -3,9 +3,9 @@
 .Button {
   outline: none;
   display: inline-block;
-  height: 57px;
+  height: 50px;
   padding: 0 20px;
-  line-height: 57px;
+  line-height: 49px;
   text-align: center;
   font-size: 14px;
   font-weight: $weight-semibold;
@@ -21,7 +21,7 @@
   transition: background-color 0.2s $easing-inQuad;
 
   &.loading {
-    pointer-events:none;
+    pointer-events: none;
     cursor: auto;
   }
   &:disabled {
@@ -42,7 +42,7 @@
     letter-spacing: 1px;
   }
   &-big {
-    min-width: 240px;
+    min-width: 230px;
   }
 }
 
@@ -74,5 +74,12 @@
     cursor: auto;
     color: $colors-grey-aluminium;
     background-color: $colors-grey-mischka;
+  }
+  &-dark {
+    color: white;
+    background-color: $colors-blue-spruce;
+    &:hover {
+      background-color: darken($colors-blue-spruce, 3);
+    }
   }
 }

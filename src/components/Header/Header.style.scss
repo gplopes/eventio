@@ -18,13 +18,13 @@
   }
 
   @include media($breakpoint-mobile) {
-    .Header-nonauth {
+    .Header-msg {
       display: none;
     }
   }
 }
 
-.Header-nonauth {
+.Header-msg {
   font-size: 14px;
   color: $colors-text-light;
   a {
@@ -34,6 +34,15 @@
       color: $colors-blue-spruce;
     }
   }
+}
+
+.Header-button {
+  border: 1px solid red;
+  color: $colors-blue-spruce;
+  font-weight: $weight-semibold;
+  font-size: $font-size-small;
+  line-height: $font-size-small;
+  text-transform: uppercase;
 }
 
 .Logo {

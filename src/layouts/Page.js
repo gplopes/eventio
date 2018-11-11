@@ -4,7 +4,15 @@ import classNames from "classnames";
 
 import "../styles/main.scss";
 
-const Page = ({ children, name, title, className, type, headerGap, fullScreen }) => {
+const Page = ({
+  children,
+  name,
+  title,
+  className,
+  type,
+  headerGap,
+  fullScreen
+}) => {
   const mainClasses = classNames(className, type, {
     "header-gap": headerGap,
     "full-screen": fullScreen
@@ -12,7 +20,7 @@ const Page = ({ children, name, title, className, type, headerGap, fullScreen })
   return (
     <main className={mainClasses} page={name}>
       <Head>
-        <title>{title}</title>
+        <title>Eventio | {title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content="Eventio" />
         <meta property="og:url" content="www.strv.com/eventio" />
@@ -24,7 +32,6 @@ const Page = ({ children, name, title, className, type, headerGap, fullScreen })
     </main>
   );
 };
-
 
 Page.defaultProps = {
   headerGap: true,

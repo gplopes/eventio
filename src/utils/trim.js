@@ -1,6 +1,7 @@
-function trim(string, cut = 50) {
-  const text = string.slice(0, cut);
-  return `${text}...`;
+function trim(text, cut = 50) {
+  if (text.length <= 50) return text;
+  const result = text.slice(0, cut);
+  return `${result}...`;
 }
 
 export default trim;

@@ -4,7 +4,7 @@ import Router from "next/router";
 import classNames from "classnames";
 import Page from "../src/layouts/Page";
 
-import { authApi, getErrorMsg } from "../src/api";
+import { userApi, getErrorMsg } from "../src/api";
 import { withConsumer } from "../src/store";
 
 import Banner from "../src/components/Banner";
@@ -13,12 +13,12 @@ import Button from "../src/components/Button";
 import { NonAuth } from "../src/components/Header";
 
 // Utils
-import validateEmail from "../src/utils/validateEmail";
+import { validateEmail } from '../src/utils/validates';
 
 // Page Config
 const pageProps = {
   name: "Login",
-  title: "Eventio | STRV",
+  title: "Welcome back trooper",
   fullScreen: true,
   headerGap: false
 };
@@ -47,7 +47,6 @@ class Login extends Component {
     this.emailProps = {
       ref: node => (this.email = node),
       label: "Email",
-      errorMsg: "Wrong email address",
       validator: validateEmail
     };
   }
@@ -73,7 +72,7 @@ class Login extends Component {
     const email = this.email.getVal();
     const password = this.password.getVal();
 
-    authApi
+    userApi
       .login(email, password)
       .then(data => {
         this.props.actions.setUser(data.user);

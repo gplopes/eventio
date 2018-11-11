@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import cookies from "next-cookies";
 
 import { eventApi } from "../api";
 import Store from "./StoreContext";
@@ -25,12 +24,14 @@ export class Provider extends Component {
       setLogout: this.setLogout,
 
       // Events
+      getMyEvents: this.getMyEvents,
+      getAllEvents: this.getAllEvents,
       joinEvent: this.joinEvent,
       leaveEvent: this.leaveEvent,
+      createEvent: this.createEvent,
 
       editEvent: this.editEvent,
       getEvent: this.getEvent,
-      myEvents: this.myEvents,
       saveEvents: this.saveEvents
     };
   }
@@ -43,19 +44,50 @@ export class Provider extends Component {
     this.setState(initialValue);
     document.cookie = "refreshToken=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
   };
+
   // EVENT ACTIONS
   joinEvent = eventId => {
-    eventApi.joinEvent(eventId, this.state.user.token).then(this.getAllEvents)
+    return eventApi
+      .joinEvent(eventId, this.state.user.token)
+      .then(this.getAllEvents);
   };
-  leaveEvent = (eventId) => {
-    eventApi.leaveEvent(eventId, this.state.user.token).then(this.getAllEvents)
-  }
-
-  // Refresh Events List
+  leaveEvent = eventId => {
+    return eventApi
+      .leaveEvent(eventId, this.state.user.token)
+      .then(this.getAllEvents);
+  };
   getAllEvents = () => {
-    eventApi.allEvents().then(this.saveEvents);
-  }
+    return eventApi.allEvents().then(this.saveEvents);
+  };
+  getMyEvents = () => {
+    const { events } = this.state;
+    if (events.length === 0)
+      return this.getAllEvents().then(this._filterOnlyMyEvents);
+    return new Promise(accept => accept(this._filterOnlyMyEvents()));
+  };
+  getEvent = eventId => {
+    const event = this.state.events.find(({ id }) => id === eventId);
+    if (event) return new Promise(accept => accept(event));
 
+    return eventApi.getEvent(eventId);
+  };
+
+  createEvent = newEvent => {
+    return eventApi.createEvent(newEvent, this.state.user.token);
+  };
+
+  // Private
+  _filterOnlyMyEvents = () => {
+    const { events, user } = this.state;
+
+    const myEvents = events.filter(({ owner, attendees }) => {
+      const myEvent = owner.id === user.id;
+      const joined = attendees.filter(attendee => attendee.id === user.id);
+      return myEvent || joined.length > 0;
+    });
+
+    return myEvents || [];
+  };
 
   // Event Button State
   saveEvents = events => {
@@ -64,16 +96,7 @@ export class Provider extends Component {
   editEvent = () => {
     console.log("EDIT BUTTON");
   };
-  myEvents = () => {
-    const { events, user } = this.state;
-    const myEvents = events.filter(({ owner }) => owner.id === user.id);
-    return myEvents || [];
-  };
 
-  getEvent = eventId => {
-    const event = this.state.events.find(({ id }) => id === eventId);
-    return event;
-  };
   render() {
     return (
       <Store.Provider value={{ ...this.state, actions: this.actions }}>

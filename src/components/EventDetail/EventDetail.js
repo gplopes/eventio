@@ -21,6 +21,7 @@ function EventDetailHeader({ id, showDelete, handleDelete }) {
 }
 
 EventDetailHeader.defaultProps = {
+  id: "",
   showDelete: false,
   handleDelete: function() {}
 };

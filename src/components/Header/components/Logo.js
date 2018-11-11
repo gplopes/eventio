@@ -3,7 +3,6 @@ import Link from "next/link";
 import classNames from "classnames";
 
 function Logo({ light = false }) {
-  //const imgSrc = light ? "logo.svg" : "logo-dark.svg";
   return (
     <Link href="/">
       <a>

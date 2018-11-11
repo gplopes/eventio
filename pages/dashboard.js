@@ -13,7 +13,7 @@ import Action from "../src/components/ActionButton";
 // Page Config
 const pageProps = {
   name: "Dashboard",
-  title: "Eventio | My Dashboard",
+  title: "My Dashboard",
 };
 
 class Dashboard extends Component {
@@ -25,7 +25,7 @@ class Dashboard extends Component {
     });
   }
   actionHandler = () => {
-    Router.push("/event/create");
+    Router.push("/event/new");
   };
   render() {
     const { events } = this.props;
