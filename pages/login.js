@@ -13,7 +13,7 @@ import Button from "../src/components/Button";
 import { NonAuth } from "../src/components/Header";
 
 // Utils
-import { validateEmail } from '../src/utils/validates';
+import { validateEmail } from "../src/utils/validates";
 
 // Page Config
 const pageProps = {
@@ -26,12 +26,11 @@ const pageProps = {
 const INVALID_INPUTS =
   "Oops! That email and password combination is not valid.";
 
-
 class Login extends Component {
   // Global Header
   static headerProps = {
     lightLogo: true,
-    rightComponent: <NonAuth />,
+    rightComponent: <NonAuth />
   };
   constructor() {
     super();
@@ -74,8 +73,8 @@ class Login extends Component {
 
     userApi
       .login(email, password)
-      .then(data => {
-        this.props.actions.setUser(data.user);
+      .then(user => {
+        this.props.actions.setUser(user);
         Router.replace("/dashboard");
       })
       .catch(error => {
