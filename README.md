@@ -1,16 +1,19 @@
 # Eventio
 
+Live: https://eventio-udyxzpxuyq.now.sh/
 “Use the force, Luke.” ...
 
 # Getting Started
 
 to develop:
+
 ```
   > npm install
   > npm run dev
 ```
 
 to build:
+
 ```
   > npm run build
 ```
@@ -21,13 +24,13 @@ to build:
 
 `./static` - public site folder
 
-``./src/api`` - api config and helper functions
+`./src/api` - api config and helper functions
 
-``./src/auth`` - authentication server logic
+`./src/auth` - authentication server logic
 
-``./src/components`` - reusable components
+`./src/components` - reusable components
 
-``./src/layouts`` - global layout components
+`./src/layouts` - global layout components
 
 `./src/lib` - 3rd party libs
 
@@ -37,40 +40,40 @@ to build:
 
 `./src/utils` - js utils functions
 
-
 # Code Guide
 
 1. Component's styles are imported directly to the component
-or the parent's component and named after the component/folder name
+   or the parent's component and named after the component/folder name
 
 2. CSS Class should be followed by the Component's name.
 
-* import the styles core into your module style so you can have access
-to the theme and global sass functions
+- import the styles core into your module style so you can have access
+  to the theme and global sass functions
 
 ```js
 // Icon.js
-import "./Icon.styles.scss"
+import "./Icon.styles.scss";
 
 function Icon() {
-  return <div className="Icon" />
+  return <div className="Icon" />;
 }
 ```
 
 ```scss
 // Icon.styles.scss
-@import './src/styles/core.scss';
+@import "./src/styles/core.scss";
 
-.Icon {}
+.Icon {
+}
 ```
 
-3. Every Page should be wrapped with ```<Page />``` component
+3. Every Page should be wrapped with `<Page />` component
 
 4. Layout are broken into section, to keep render function cleaner
-you can use ```<Section />``` wrapper
+   you can use `<Section />` wrapper
 
 ```jsx
-import { Page, Section } from './src/layouts';
+import { Page, Section } from "./src/layouts";
 
 function Login() {
   return (
@@ -83,13 +86,12 @@ function Login() {
           <h2>Section without component</h2>
         </div>
       </section>
-  </Page>
+    </Page>
   );
 }
 ```
 
 ## Extra npm extra commands
-
 
 1. Run Prettier Formatter
 
@@ -99,20 +101,22 @@ function Login() {
 
 2. Run Test
 
-````
+```
 > npm run jest
-````
+```
 
 ## Release
-merge all "the branches to be release" to ```"live-app"``` branch.
 
+```
+> npm install -g now
+> now
+```
 
 ## Built with
 
-* [Nextjs](https://github.com/zeit/next.js)
-* [React](http://reactjs.org)
-* [Netlify](https://www.netlify.com/)
-
+- [Nextjs](https://github.com/zeit/next.js)
+- [React](http://reactjs.org)
+- [Now](https://zeit.co/now)
 
 # TODO
 
@@ -129,6 +133,7 @@ edit option needs work
 ### Test
 
 Test still needs to be written, the jest is already plugged on the project.
+
 ```
 > npm test
 ```
