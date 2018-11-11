@@ -1,6 +1,5 @@
 # Eventio
 
-Live: https://eventio-udyxzpxuyq.now.sh/
 “Use the force, Luke.” ...
 
 # Getting Started
