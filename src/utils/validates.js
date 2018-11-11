@@ -24,7 +24,7 @@ export const validateDate = value => {
   const now = new Date();
   const inputDate = new Date(value);
   return {
-    valid: inputDate > now,
+    valid: inputDate >= now,
     error: "We haven't invented time machine yet :)"
   };
 };

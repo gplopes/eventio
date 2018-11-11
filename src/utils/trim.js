@@ -1,5 +1,5 @@
 function trim(text, cut = 50) {
-  if (text.length <= 50) return text;
+  if (text.length <= cut) return text;
   const result = text.slice(0, cut);
   return `${result}...`;
 }

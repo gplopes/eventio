@@ -19,8 +19,15 @@ function getDate(timestamp) {
   const day = date.getDate();
   const year = date.getFullYear();
   const hours = date.getHours();
+
+  // AM-PM
   const amPm = hours >= 12 ? 'PM' : 'AM';
-  const time = `${date.getHours() % 12}:${date.getMinutes()} ${amPm}`
+  // Mins
+  const dateMins = date.getMinutes();
+  const mins = dateMins < 10 ? `0${dateMins}` : dateMins;
+  // Time
+  const time = `${date.getHours() % 12}:${mins} ${amPm}`;
+
   return `${month} ${day}, ${year} - ${time}`;
 }
 

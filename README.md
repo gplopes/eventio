@@ -112,3 +112,23 @@ merge all "the branches to be release" to ```"live-app"``` branch.
 * [Nextjs](https://github.com/zeit/next.js)
 * [React](http://reactjs.org)
 * [Netlify](https://www.netlify.com/)
+
+
+# TODO
+
+### SignUp
+
+status: layout and logic is pretty much done, it needs to
+connect to the api and do the correct redirection
+
+### Event Detail
+
+status: a few components done, it can display the event but
+edit option needs work
+
+### Test
+
+Test still needs to be written, the jest is already plugged on the project.
+```
+> npm test
+```

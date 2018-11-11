@@ -1,9 +1,9 @@
-function getInitials({ firstName = "", lastName  = "" }) {
+export function getInitials({ firstName = "", lastName  = "" }) {
   const initials = firstName[0] + lastName[0];
   return initials || "";
 }
 
-function getFullName(user = {}) {
+export function getFullName(user = {}) {
   const firstName = user.firstName || "";
   const lastName = user.lastName || "";
   return `${firstName} ${lastName}`;
