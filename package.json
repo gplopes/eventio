@@ -4,6 +4,7 @@
   "description": "envetio - strv project",
   "main": "index.js",
   "scripts": {
+    "tslint": "tslint -c tslint.json 'src/**/*.ts{,x}'",
     "dev": "next",
     "build": "next build",
     "start": "next start",
@@ -15,8 +16,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
+    "*.{.ts,.tsx}": [
+      "npm run tslint",
       "git add"
     ]
   },
@@ -31,23 +32,26 @@
   },
   "homepage": "https://github.com/gplopes/eventio#readme",
   "dependencies": {
+    "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
-    "http-status": "^1.2.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "next-cookies": "^1.0.3"
+    "http-status": "^1.3.1",
+    "next-cookies": "^1.0.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "styled-components": "^4.1.2"
   },
   "devDependencies": {
     "@zeit/next-sass": "^1.0.1",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "husky": "^1.1.3",
+    "husky": "^1.2.0",
     "jest": "^23.6.0",
-    "lint-staged": "^8.0.4",
+    "lint-staged": "^8.1.0",
     "next": "^7.0.2",
-    "node-sass": "^4.9.4",
-    "prettier": "1.15.2"
+    "node-sass": "^4.10.0",
+    "prettier": "^1.15.2",
+    "tslint-config-prettier": "^1.17.0"
   }
 }
