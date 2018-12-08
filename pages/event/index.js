@@ -9,7 +9,7 @@ import EventForm from "../../src/components/EventForm";
 import EventDetail from "../../src/components/EventDetail";
 import BackButton from "../../src/components/Header/components/BackIcon";
 import EventCard from "../../src/components/EventCard";
-import TagName from "../../src/components/TagName";
+import TagName from "../../src/components/TagName/TagName";
 
 const colEventSize = (100 / 3) * 2;
 const colAttendeesSize = 100 - colEventSize;

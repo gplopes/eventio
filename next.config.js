@@ -1,14 +1,18 @@
-const withSass = require("@zeit/next-sass");
-const withTypescript = require('@zeit/next-typescript')
+const withPlugins = require("next-compose-plugins");
 
-const typescript = withTypescript();
-const sass = withSass();
+// plugins
+const sass = require("@zeit/next-sass");
+const typescript = require("@zeit/next-typescript");
 
-module.exports = {
-  ...typescript,
-  ...sass,
+const nextConfig = {
   onDemandEntries: {
     // on dev, since our pages are so expensive, lets keep them for 24 hours
     maxInactiveAge: 1000 * 60 * 60 * 24
   }
 };
+
+const plugins = [typescript, sass];
+
+
+
+module.exports = withPlugins(plugins, nextConfig);

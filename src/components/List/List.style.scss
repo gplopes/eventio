@@ -1,13 +1,6 @@
 @import "../../styles/core.scss";
 
 
-.List-items {
-  .col { 
-    // border: 1px solid red;
-
-  }
-}
-
 .List-filter {
   li {
     list-style: none;
@@ -37,16 +30,6 @@
   }
 }
 
-.NoEvent {
-  margin-top: 100px;
-  opacity: 0.2;
-  img {
-    display: block;
-    margin: 0;
-    width: 50px;
-    margin-bottom: 20px;
-  }
-}
 
 
 .FilterMenu-dropdown {

@@ -3,9 +3,10 @@ import Router from "next/router";
 import httpStatus from "http-status";
 
 import Page from "../src/layouts/Page";
-import Banner from "../src/components/Banner";
+import Banner from "../src/components/Banner/Banner";
 import Button from "../src/components/Button";
-import { NonAuth } from "../src/components/Header";
+import { NonAuth } from "../src/components/Header/components/Messages";
+
 
 // Page Config
 const pageProps = {

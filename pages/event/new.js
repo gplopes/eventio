@@ -6,7 +6,7 @@ import { Page, Section } from "../../src/layouts";
 import { validateCapacity, validateDate } from "../../src/utils/validates";
 import { withConsumer } from "../../src/store";
 
-import CloseButton from "../../src/components/Header/components/CloseButon";
+import CloseButton from "../../src/components/Header/components/Buttons";
 import Button from "../../src/components/Button";
 import TextInput from "../../src/components/TextInput";
 
