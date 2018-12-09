@@ -4,7 +4,7 @@ import httpStatus from "http-status";
 
 import Page from "../src/layouts/Page";
 import Banner from "../src/components/Banner/Banner";
-import Button from "../src/components/Button";
+import Button from "../src/components/Button/Button";
 import { NonAuth } from "../src/components/Header/components/Messages";
 
 

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import colors from '../../theme/colors';
 
 export const Header = styled.header`
   padding: 39px 0;
@@ -9,7 +8,6 @@ export const Header = styled.header`
   left: 0;
   width: 100%;
   font-size: 15px;
-  color: ${colors};
 
   .container {
     max-width: 1380px;

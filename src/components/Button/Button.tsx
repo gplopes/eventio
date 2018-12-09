@@ -30,26 +30,15 @@ type Props = {
   loading?: boolean;
 };
 
-const defaultProps: Props = {
-  type: ButtonType.primary,
-  disabled: false,
-  loading: false,
-  size: SizeType.big,
-  onClick: function() {}
-};
 
 ////////////////////////////////////////////// UI
 
 function ButtonContainer(props: Props) {
-  const { children, type, size, disabled, onClick, loading } = Object.assign(
-    {},
-    defaultProps,
-    props
-  );
+  const { children, type, size, disabled, onClick, loading } = props;
   return (
     <Button
       size={size}
-      color={type}
+      type={type}
       onClick={onClick}
       disabled={disabled || loading}
     >
@@ -57,6 +46,14 @@ function ButtonContainer(props: Props) {
     </Button>
   );
 }
+
+ButtonContainer.defaultProps = {
+  type: ButtonType.primary,
+  disabled: false,
+  loading: false,
+  size: SizeType.big,
+  onClick: function() {}
+};
 
 //////////////////////////////// Options
 

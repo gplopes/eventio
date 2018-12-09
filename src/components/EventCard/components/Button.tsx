@@ -1,7 +1,8 @@
 import React from "react";
 import Router from "next/router";
+import { connect } from "react-redux";
 
-import { withConsumer } from "../../../store";
+import { leaveEvent, joinEvent } from "../../../store/eventsStore";
 import Button from "../../Button/Button";
 
 ///////////////////////////////////////////////// Types
@@ -10,36 +11,20 @@ type Props = {
   myId: string;
   ownerId: string;
   attendees: object[];
-  actions: {
-    leaveEvent(): void;
-    joinEvent(): void;
-  };
   eventId: string;
   capacity: number;
 };
 
 ///////////////////////////////////////////////////////////////// Helpers
 
-type ButtonState = {
-  myId: string;
-  ownerId: string;
-  attendees: object[];
-  actions: {
-    leaveEvent(): void;
-    joinEvent(): void;
-  };
-  capacity: number;
-};
-
 type State = {
   type: Button.Type;
   text: string;
   action(event: string): void;
-}
+};
 
-
-function getButtonStates(params: ButtonState): State {
-  const { ownerId, myId, attendees, actions, capacity } = params;
+function getButtonStates(params: Props): State {
+  const { ownerId, myId, attendees, capacity } = params;
 
   const state = {
     edit: {
@@ -54,12 +39,12 @@ function getButtonStates(params: ButtonState): State {
     leave: {
       type: Button.Type.alert,
       text: "leave",
-      action: actions.leaveEvent
+      action: params.leaveEvent
     },
     join: {
       type: Button.Type.primary,
       text: "join",
-      action: actions.joinEvent
+      action: params.joinEvent
     },
     full: {
       type: Button.Type.disabled,
@@ -82,25 +67,11 @@ function getButtonStates(params: ButtonState): State {
   return state.join;
 }
 
-/////////////////////////////////////////////// UI
+////////////////////////////////////////////////////////////////////// UI
 
 function EventButton(props: Props) {
-  const {
-    myId,
-    ownerId,
-    attendees,
-    actions,
-    eventId,
-    capacity,
-  } = props;
-
-  const buttonInfo = getButtonStates({
-    myId,
-    ownerId,
-    attendees,
-    actions,
-    capacity
-  });
+  const { eventId } = props;
+  const buttonInfo = getButtonStates({ ...props });
 
   return (
     <Button
@@ -113,4 +84,11 @@ function EventButton(props: Props) {
   );
 }
 
-export default withConsumer(EventButton);
+//////////////////////////////////// Connect
+
+const mapDispatchToProps = { joinEvent, leaveEvent };
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(EventButton);

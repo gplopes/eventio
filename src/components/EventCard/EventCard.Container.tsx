@@ -1,6 +1,5 @@
 import React from "react";
-
-import { withConsumer } from "../../store";
+import { connect } from "react-redux";
 
 import EventCard from "./EventCard";
 import EventCardSimplified from "./EventCard.Simplified";
@@ -73,5 +72,16 @@ function EventCardContainer(props: Props) {
 }
 
 EventCardContainer.displayName = "EventCardContainer";
+EventCardContainer.defaultProps = {
+  simplified: false
+};
 
-export default withConsumer(EventCardContainer);
+///////////////////////////////////////////// Connnect
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(EventCardContainer);

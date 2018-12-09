@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { popIn } from '../../theme/keyframes';
+import { inOutExpo } from '../../theme/easing';
 
 /////////////////////////////////// Type
 
@@ -7,11 +9,6 @@ type Props = {
   image?: string;
   initials?: string;
   size?: "small" | "big";
-};
-
-const defaultProps: Props = {
-  size: "small",
-  initials: "XX"
 };
 
 /////////////////////////////////////////////// Styled
@@ -23,10 +20,12 @@ const AvatarStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: $colors-grey-mischka;
-  color: $colors-grey-regent;
-  font-weight: $weight-medium; */
+  background-color: ${({ theme }) => theme.color.greyMischka};
+  color: ${({ theme }) => theme.color.greyRegent};
+  font-weight: 500;
   padding-top: 2px;
+  will-change: transform, opacity;
+  animation: ${popIn} 0.5s ${inOutExpo};
 
   ${(props: Props) =>
     props.image &&
@@ -46,12 +45,16 @@ const AvatarStyled = styled.div`
 //////////////////////////////////////////////// UI
 
 function Avatar(props: Props) {
-  const { image, initials, size } = Object.assign({}, defaultProps, props);
+  const { image, initials, size } = props;
   return (
     <AvatarStyled image={image} size={size}>
       {!image && initials && <p>{initials}</p>}
     </AvatarStyled>
   );
+}
+
+Avatar.defaultProps = {
+  size: "small",
 }
 
 export default Avatar;

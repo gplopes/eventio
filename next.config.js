@@ -3,6 +3,7 @@ const withPlugins = require("next-compose-plugins");
 // plugins
 const sass = require("@zeit/next-sass");
 const typescript = require("@zeit/next-typescript");
+const images = require("next-images");
 
 const nextConfig = {
   onDemandEntries: {
@@ -11,8 +12,6 @@ const nextConfig = {
   }
 };
 
-const plugins = [typescript, sass];
-
-
+const plugins = [typescript, sass, images];
 
 module.exports = withPlugins(plugins, nextConfig);

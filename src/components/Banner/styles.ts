@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
+import { fadeIn } from "../../theme/keyframes";
 
 type Props = {
   bg?: string;
@@ -12,8 +13,9 @@ export const BannerStyled = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  padding: 80px 60px;
   /* padding: 80px $global-padding; */
-  /* background-color: $colors-text; */
+  background-color: ${({ theme }) => theme.color.text};
   background-size: cover;
   ${(props: Props) =>
     props.bg &&
@@ -22,17 +24,6 @@ export const BannerStyled = styled.div`
     `} /* @include media($breakpoint-tablet) {
     display: none;
   } */
-`;
-
-const fadeIn = keyframes`
-  from {
-    transform: translate3d(0,50%,0);
-    opacity: 0;
-  }
-  to {
-    transform: translate3d(0,0,0);
-    opacity: 1;
-  }
 `;
 
 export const Quote = styled.div`
@@ -51,6 +42,6 @@ export const Quote = styled.div`
   hr {
     width: 12px;
     height: 2px;
-    /* background-color: $colors-primary; */
+    background-color: ${({ theme }) => theme.color.primary};
   }
 `;

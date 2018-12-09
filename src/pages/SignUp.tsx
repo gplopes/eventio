@@ -1,9 +1,9 @@
 import React, { PureComponent, ReactNode } from "react";
 import Page from "../layouts/Page";
 
-import Banner from "../components/Banner";
+import Banner from "../components/Banner/Banner";
 import TextInput from "../components/TextInput";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 
 import { HaveAccount } from "../components/Header/components/Messages";
 import { validateEmail, validatePassword, TypeValidation } from "../utils/validates";

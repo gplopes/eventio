@@ -1,7 +1,5 @@
 import React from "react";
-
 import { BannerStyled, Quote } from "./styles";
-
 
 //////////////////////////////// Props
 
@@ -12,14 +10,15 @@ type Props = {
 };
 
 const defaultProps: Props = {
-  backgroundImg: "/static/intro-bg.png",
+  backgroundImg: require('./introBg.png'),
   quote: "“Great, kid. Don’t get cocky.”",
   author: "Han Solo"
 };
 
 ////////////////////////////////////////// UI
+
 function Banner(props: Props) {
-  const { quote, author, backgroundImg } = Object.assign({}, defaultProps, props);
+  const { quote, author, backgroundImg } = props;
   return (
     <BannerStyled bg={backgroundImg}>
       <Quote>
@@ -31,5 +30,5 @@ function Banner(props: Props) {
   );
 }
 
-
+Banner.defaultProps = defaultProps;
 export default Banner;

@@ -1,11 +1,17 @@
 import React from "react";
 import Link from "next/link";
 
-import "./EventCard.styles.scss";
-import { EventCard } from "./style";
+import {
+  EventCard,
+  Attendees,
+  Footer,
+  Desc,
+  About,
+  Href,
+  StartsAt
+} from "./EventCard.style";
 
 import Button from "./components/Button";
-
 import Icon from "../Icon";
 
 ///////////////////////////////////// Props
@@ -40,32 +46,35 @@ function EventCardDefault(props: Props) {
   } = props;
 
   return (
-    <EventCard big>
-      <p className="EventCard-date">{startsAt}</p>
+    <EventCard>
+      <StartsAt>{startsAt}</StartsAt>
       <Link href={linkProps}>
-        <a className="EventCard-Link">
-          <div className="EventCard-about">
+        <Href>
+          <About>
             <h5>{title}</h5>
             {owner && (
               <p>
                 {owner.firstName} {owner.lastName}
               </p>
             )}
-          </div>
-          <p className="EventCard-desc">{eventDesc}</p>
-        </a>
+          </About>
+          <Desc>{eventDesc}</Desc>
+        </Href>
       </Link>
-      <div className="EventCard-footer flex-row">
-        <div className="EventCard-attendees flex-row">
+      <Footer className="flex-row">
+        <Attendees className="flex-row">
           <Icon type={Icon.Type.user} />
-          {attendees && <span>{attendees.length} of {capacity}</span>}
-        </div>
+          {attendees && (
+            <span>
+              {attendees.length} of {capacity}
+            </span>
+          )}
+        </Attendees>
         <Button {...buttonProps} />
-      </div>
+      </Footer>
     </EventCard>
   );
 }
-
 
 /////////////////////////////////
 

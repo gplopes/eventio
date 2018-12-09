@@ -4,13 +4,13 @@ import { Provider } from "react-redux";
 
 // Store
 import stores from "../store";
-import { setUser } from '../store/userStore';
+import { setUser } from "../store/userStore";
 
 // Theme
-import "../theme/colors";
+import color from "../theme/colors";
 
-import { Provider as OldProvider } from "../store";
 import Header from "../components/Header/Header";
+// import { Provider as OldProvider } from "../store";
 
 type Props = {
   Component: any;
@@ -30,19 +30,15 @@ const registerUser = (user: object) => stores.dispatch(setUser(user));
 
 function App(props: Props) {
   const { Component, pageProps } = props;
-  const headerProps = Component || Component.headerProps || {};
   props.user && registerUser(props.user);
   return (
-    <ThemeProvider theme={{ mode: "light" }}>
+    <ThemeProvider theme={{ color }}>
       <Provider store={stores}>
-        <OldProvider>
-          <Header {...headerProps} />
-          <Component {...pageProps} />
-        </OldProvider>
+        <Header {...Component.headerProps} />
+        <Component {...pageProps} />
       </Provider>
     </ThemeProvider>
   );
 }
-
 
 export default App;

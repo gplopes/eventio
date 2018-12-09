@@ -1,5 +1,20 @@
 import { keyframes } from "styled-components";
 
+/////////////////////////////////// PopIn
+
+export const popIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+    transform-origin: center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 /////////////////////////////////// FadeIn
 export const fadeIn = keyframes`
   from {
@@ -11,7 +26,6 @@ export const fadeIn = keyframes`
     opacity: 1;
   }
 `;
-
 
 /////////////////////////////////////// BounceInUp
 export const bounceInUp = keyframes`

@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import { Page } from "../layouts";
-import { withConsumer } from "../store";
 
-import List from "../components/List";
+import List from "../components/List/List";
 import ProfileHeader from "../components/ProfileHeader";
 
 
@@ -28,9 +27,9 @@ class Profile extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.props.actions.getMyEvents().then((events: object[]) => {
-      this.setState({ myEvents: events });
-    });
+    // this.props.actions.getMyEvents().then((events: object[]) => {
+    //   this.setState({ myEvents: events });
+    // });
   }
   render() {
     const { myEvents, hasLoaded } = this.state;
@@ -50,4 +49,4 @@ class Profile extends PureComponent<Props, State> {
 
 
 
-export default withConsumer(Profile);
+export default Profile;

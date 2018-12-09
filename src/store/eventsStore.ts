@@ -1,7 +1,8 @@
+import eventApi from "../api/eventApi";
 ////////////////// Types
 
 enum CONSTANTS {
-  SET_EVENTS = 'SET_EVENTS',
+  SET_EVENTS = "SET_EVENTS",
 }
 
 type Payload = {
@@ -9,27 +10,49 @@ type Payload = {
   type: CONSTANTS;
 };
 
-///////////////////////////// Initial State
+/////////////////////////// Actions Async
 
-const initialState = {
-  events: []
+export const fetchAllEvents = () => {
+  return (dispatch: any) => {
+    eventApi.allEvents().then(events => {
+      dispatch(setEvents(events));
+    });
+  };
 };
 
-/////////////////////////// Actions
+export const joinEvent = (eventId: string) => {
+  return (dispatch: any, getState: any) => {
+    const { user } = getState();
+    eventApi
+      .joinEvent(eventId, user.token)
+      .then(() => dispatch(fetchAllEvents()));
+  };
+};
+
+
+export const leaveEvent = (eventId: string) => {
+  return (dispatch: any, getState: any) => {
+    const { user } = getState();
+    eventApi
+      .leaveEvent(eventId, user.token)
+      .then(() => dispatch(fetchAllEvents()));
+  };
+};
+
+
+/////////////////////////////////// Actions
 
 export const setEvents = (payload: any): Payload => ({
   payload,
   type: CONSTANTS.SET_EVENTS
 });
 
-
-
 ///////////////////// Reducer
 
-export const eventsReducer = (state: object = initialState, action: Payload) => {
+export const eventsReducer = (state: object[] = [], action: Payload) => {
   switch (action.type) {
     case CONSTANTS.SET_EVENTS:
-      return { ...state, events: action.payload };
+      return action.payload;
 
     default:
       return state;

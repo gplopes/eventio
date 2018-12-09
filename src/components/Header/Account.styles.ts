@@ -5,11 +5,6 @@ export const AccountContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  .Avatar {
-    will-change: transform, opacity;
-    /* animation: popIn 0.5s $easing-inOutExpo; */
-  }
 `;
 
 export const Button = styled.div`

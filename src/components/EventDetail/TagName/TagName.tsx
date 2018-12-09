@@ -12,8 +12,8 @@ type Props = {
 const Tag = styled.div`
   display: inline-block;
   padding: 5px 16px;
-  /* color: $colors-grey-regent;
-  background-color: $colors-grey-mischka; */
+  color: ${({ theme }) => theme.color.greyRegent};
+  background-color: ${({ theme }) => theme.color.greyMischka};
   border-radius: 20px;
 `;
 

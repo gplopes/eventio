@@ -4,20 +4,18 @@ import styled from "styled-components";
 import Icon from "../Icon/Icon";
 
 /// Theme  Styling
-import color, { Colors } from "../../theme/colors";
-import { inOutBack } from '../../theme/easing';
-import { bounceInUp } from '../../theme/keyframes';
+import { inOutBack } from "../../theme/easing";
+import { bounceInUp } from "../../theme/keyframes";
 
 ///////////////////////////////////// Props
 
 type Props = {
   onClick(): void;
-  color?: Colors
 };
 
 //////////////////////////////////// Styled
 
-const Button = styled.button<{ color: Colors }>`
+const Button = styled.button`
   border: 0;
   outline: none;
   cursor: pointer;
@@ -30,7 +28,7 @@ const Button = styled.button<{ color: Colors }>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: ${color};
+  background-color: ${({ theme }) => theme.color.dark};
   box-shadow: 0 6px 9px 0 rgba(53, 53, 53, 0.1);
   transition: transform 0.2s ${inOutBack};
   animation: ${bounceInUp} 0.7s ${inOutBack} 0.5s backwards;
@@ -43,7 +41,7 @@ const Button = styled.button<{ color: Colors }>`
 
 export default function ActionButton(props: Props) {
   return (
-    <Button onClick={props.onClick} color={Colors.dark}>
+    <Button onClick={props.onClick}>
       <Icon type={Icon.Type.plus} />
     </Button>
   );

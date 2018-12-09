@@ -1,16 +1,15 @@
-
 import React, { Component, ReactNode } from "react";
 import Router from "next/router";
-import classNames from "classnames";
+import { connect } from 'react-redux';
+import { setUser } from "../store/userStore";
 
 import Page from "../layouts/Page";
 
 import { userApi, getErrorMsg } from "../api";
-import { withConsumer } from "../store";
 
-import Banner from "../components/Banner";
+import Banner from "../components/Banner/Banner";
 import TextInput from "../components/TextInput";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import { NonAuth } from "../components/Header/components/Messages";
 
 // Utils
@@ -27,20 +26,17 @@ const pageProps = {
 const INVALID_INPUTS =
   "Oops! That email and password combination is not valid.";
 
-
 ///////////////////////////////////////// Props & State
 
 type Props = {
-  actions: {
-    setUser(user: any): void
-  }
+  setUser(user: object): void;
 };
 
 type State = {
-  isSubmitting: boolean,
-  hasError: boolean,
-  pwdType: string,
-  errorMsg?: string
+  isSubmitting: boolean;
+  hasError: boolean;
+  pwdType: string;
+  errorMsg?: string;
 };
 
 //////////////////////////////////////////// UI
@@ -48,16 +44,16 @@ class Login extends Component<Props, State> {
   password: any; //ReactNode;
   email: any; //ReactNode;
   emailProps: {
-    ref: (node: ReactNode) => ReactNode,
-    label: string,
-    validator(val: string): TypeValidation
-  }
-
+    ref: (node: ReactNode) => ReactNode;
+    label: string;
+    validator(val: string): TypeValidation;
+  };
 
   static headerProps = {
     lightLogo: true,
     rightComponent: <NonAuth />
   };
+
   constructor(props: any) {
     super(props);
 
@@ -102,7 +98,7 @@ class Login extends Component<Props, State> {
     userApi
       .login(email, password)
       .then(user => {
-        this.props.actions.setUser(user);
+        this.props.setUser(user);
         Router.replace("/dashboard");
       })
       .catch(error => {
@@ -129,7 +125,7 @@ class Login extends Component<Props, State> {
       label: "Password",
       icon: true,
       iconProps: {
-        className: classNames({ active: this.state.pwdType === "text" }),
+        className: `${this.state.pwdType === "text" && "active"}`,
         type: TextInput.Icon.eye,
         onClick: this.togglePwdInputType
       }
@@ -139,7 +135,7 @@ class Login extends Component<Props, State> {
         <Banner />
         <section className="centered-content">
           <div className="form-wrapper">
-            <h4>Sign in to Eventio v2.</h4>
+            <h4>Sign in to Eventio v2</h4>
             <p className="text-light">Enter your details below.</p>
             {this.renderError()}
             <form className="form-inputs">
@@ -147,7 +143,7 @@ class Login extends Component<Props, State> {
               <TextInput {...passwordProps} />
               <NonAuth />
               <Button onClick={this.submitHandler} loading={isSubmitting}>
-                Sign Inx
+                Sign In
               </Button>
             </form>
           </div>
@@ -157,5 +153,11 @@ class Login extends Component<Props, State> {
   }
 }
 
+//////////////////////////////////// Connect
 
-export default withConsumer(Login);
+const mapDispatchToProps = { setUser };
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);

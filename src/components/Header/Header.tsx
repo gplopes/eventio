@@ -1,9 +1,10 @@
 import React, { ReactNode } from "react";
 import Router from "next/router";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+
+import { logout } from "../../store/userStore";
 
 import { Header } from "./Header.style";
-
 import Account from "./Account";
 import Logo from "./Logo";
 
@@ -19,9 +20,7 @@ type Props = {
     firstName: string;
     lastName: string;
   };
-  actions?: {
-    setLogout(): void;
-  };
+  logout?: () => void;
 };
 
 const defaultProps: Props = {
@@ -38,16 +37,14 @@ function HeaderContainer(props: Props) {
     lightLogo,
     centerItem,
     user,
-    actions,
+    logout,
     hideAccount,
     rightComponent
   } = props;
 
-  console.log("HHEADER", user);
-
   // Actions
   const setLogout = () => {
-    actions && actions.setLogout();
+    logout && logout();
     Router.replace("/login");
   };
 
@@ -58,9 +55,9 @@ function HeaderContainer(props: Props) {
     } else if (React.isValidElement(rightComponent)) {
       return rightComponent;
     }
-    return null;
+    console.log("hrey", rightComponent);
+    return rightComponent;
   };
-
 
   return (
     <Header>
@@ -73,12 +70,11 @@ function HeaderContainer(props: Props) {
   );
 }
 
-///////////////////////
-
 HeaderContainer.defaultProps = defaultProps;
 
 /////////////////////////////////// Connect
 
+const mapDispatchToProps = { logout };
 
 const mapStateToProps = (state: any) => {
   return {
@@ -86,4 +82,7 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(HeaderContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderContainer);

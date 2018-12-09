@@ -1,8 +1,8 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { Section } from "../../layouts";
 import "./ProfileHeader.style.scss";
 
-import { withConsumer } from "../../store";
 import getName from "../../utils/getUserName";
 
 import Avatar from "../Avatar/Avatar";
@@ -41,4 +41,14 @@ function ProfileHeader(props: Props) {
   );
 }
 
-export default withConsumer(ProfileHeader);
+
+//////////////////////////////////////// Connect
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.user
+  };
+};
+
+
+export default connect(mapStateToProps)(ProfileHeader);

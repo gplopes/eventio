@@ -1,22 +1,21 @@
 import styled, { css } from "styled-components";
-import colors from '../../theme/colors';
 import { SizeType, ButtonType } from "./Button";
 
 type Props = {
   loading?: boolean;
   disabled?: boolean;
   size?: SizeType;
-  color?: ButtonType;
+  type?: ButtonType;
 };
 
 /////////////////////////// Styles
 
 const getColor = (props: Props) => {
-  switch (props.color) {
+  switch (props.type) {
     case ButtonType.alert:
       return css`
         color: white;
-        background-color: $colors-red-strawberry;
+        background-color: ${({ theme }) => theme.color.alert};
         &:hover {
           background-color: darken($colors-red-strawberry, 3);
         }
@@ -32,7 +31,7 @@ const getColor = (props: Props) => {
     case ButtonType.update:
       return css`
         color: $colors-grey-aluminium;
-        background-color: $colors-grey-mischka;
+        background-color: ${({ theme }) => theme.color.greyMischka};
         &:hover {
           background-color: darken($colors-grey-mischka, 3);
         }
@@ -43,13 +42,13 @@ const getColor = (props: Props) => {
         opacity: 0.5;
         cursor: auto;
         color: $colors-grey-aluminium;
-        background-color: $colors-grey-mischka;
+        background-color: ${({ theme }) => theme.color.greyMischka};
       `;
 
     default:
       return css`
         color: white;
-        background-color: ${colors};
+        background-color: ${({ theme }) => theme.color.primary};
 
         &:hover {
           background-color: darken($colors-primary, 3);
@@ -88,7 +87,7 @@ export const Button = styled.button`
   line-height: 49px;
   text-align: center;
   font-size: 14px;
-  /* font-weight: $weight-semibold; */
+  font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
@@ -98,7 +97,7 @@ export const Button = styled.button`
   border: 0;
   cursor: pointer;
   box-sizing: border-box;
-  /* transition: background-color 0.2s $easing-inQuad; */
+  transition: background-color 0.2s $easing-inQuad;
 
   ${getColor}
   ${getSize}

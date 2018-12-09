@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
-import { setEvents } from "../store/eventsStore";
+import { setEvents, fetchAllEvents } from "../store/eventsStore";
 
 import Page from "../layouts/Page";
-
-import { eventApi } from "../api";
-
-import List from "../components/List";
+import List from "../components/List/List";
 import Action from "../components/ActionButton/ActionButton";
 
 // Page Config
@@ -21,6 +18,7 @@ const pageProps = {
 
 type Props = {
   events: object[];
+  fetchAllEvents(): void;
   setEvents(event: object): void;
 };
 
@@ -31,12 +29,9 @@ type State = {
 //////////////////////////////////////////////// UI
 
 class Dashboard extends Component<Props, State> {
-  state = { hasLoaded: false };
+  state = { hasLoaded: true };
   componentDidMount() {
-    eventApi.allEvents().then(events => {
-      this.props.setEvents(events);
-      this.setState({ hasLoaded: true });
-    });
+    this.props.fetchAllEvents();
   }
   actionHandler = () => {
     Router.push("/event/new");
@@ -59,11 +54,11 @@ class Dashboard extends Component<Props, State> {
 
 //////////////////////////// Connect
 
-const mapDispatchToProps = { setEvents };
+const mapDispatchToProps = { setEvents, fetchAllEvents };
 
 const mapStateToProps = (state: any) => {
   return {
-    events: state.events.events
+    events: state.events
   };
 };
 

@@ -7,7 +7,7 @@ import { validateCapacity, validateDate } from "../../src/utils/validates";
 import { withConsumer } from "../../src/store";
 
 import CloseButton from "../../src/components/Header/components/Buttons";
-import Button from "../../src/components/Button";
+import Button from "../../src/components/Button/Button";
 import TextInput from "../../src/components/TextInput";
 
 // Page Config

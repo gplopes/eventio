@@ -39,26 +39,7 @@ export class Provider extends Component {
   // USER ACTIONS
   isMe = userId => this.state.user.id === userId;
   isAuth = () => this.state.auth;
-  setUser = user => this.setState({ user, auth: true });
-  setLogout = () => {
-    this.setState(initialValue);
-    document.cookie = "refreshToken=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
-  };
 
-  // EVENT ACTIONS
-  joinEvent = eventId => {
-    return eventApi
-      .joinEvent(eventId, this.state.user.token)
-      .then(this.getAllEvents);
-  };
-  leaveEvent = eventId => {
-    return eventApi
-      .leaveEvent(eventId, this.state.user.token)
-      .then(this.getAllEvents);
-  };
-  getAllEvents = () => {
-    return eventApi.allEvents().then(this.saveEvents);
-  };
   getMyEvents = () => {
     const { events } = this.state;
     if (events.length === 0)
@@ -76,9 +57,6 @@ export class Provider extends Component {
     return eventApi.createEvent(newEvent, this.state.user.token);
   };
 
-  saveEvents = events => {
-    this.setState({ events });
-  };
 
   // Private
   _filterOnlyMyEvents = () => {
@@ -93,8 +71,6 @@ export class Provider extends Component {
     return myEvents || [];
   };
 
-  // TODO
-  editEvent = () => {};
 
   render() {
     return (
