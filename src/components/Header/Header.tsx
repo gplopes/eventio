@@ -1,10 +1,11 @@
 import React, { ReactNode } from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
-
 import { logout } from "../../store/userStore";
 
-import { Header } from "./Header.style";
+import urls from '../../routes/urls';
+
+import { HeaderStyled } from "./Header.style";
 import Account from "./Account";
 import Logo from "./Logo";
 
@@ -32,7 +33,7 @@ const defaultProps: Props = {
 
 ///////////////////////////////////////////////// UI
 
-function HeaderContainer(props: Props) {
+function Header(props: Props) {
   const {
     lightLogo,
     centerItem,
@@ -45,32 +46,30 @@ function HeaderContainer(props: Props) {
   // Actions
   const setLogout = () => {
     logout && logout();
-    Router.replace("/login");
+    Router.replace(urls.LOGIN);
   };
 
   /// Right Item
   const renderRightItem = (): ReactNode | null => {
     if (user && user.auth && !hideAccount) {
       return <Account {...user} setLogout={setLogout} />;
-    } else if (React.isValidElement(rightComponent)) {
-      return rightComponent;
     }
-    console.log("hrey", rightComponent);
+
     return rightComponent;
   };
 
   return (
-    <Header>
+    <HeaderStyled>
       <div className="container">
         <Logo light={lightLogo} />
         {centerItem}
         {renderRightItem()}
       </div>
-    </Header>
+    </HeaderStyled>
   );
 }
 
-HeaderContainer.defaultProps = defaultProps;
+Header.defaultProps = defaultProps;
 
 /////////////////////////////////// Connect
 
@@ -85,4 +84,4 @@ const mapStateToProps = (state: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HeaderContainer);
+)(Header);

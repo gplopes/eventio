@@ -2,16 +2,16 @@ import React from "react";
 import Link from "next/link";
 
 import {
-  EventCard,
+  CardStyled,
   Attendees,
   Footer,
   Desc,
   About,
   Href,
   StartsAt
-} from "./EventCard.style";
+} from "./Card.style";
 
-import Button from "./components/Button";
+import Button from "./components/EventButtonContainer";
 import Icon from "../Icon";
 
 ///////////////////////////////////// Props
@@ -46,7 +46,7 @@ function EventCardDefault(props: Props) {
   } = props;
 
   return (
-    <EventCard>
+    <CardStyled>
       <StartsAt>{startsAt}</StartsAt>
       <Link href={linkProps}>
         <Href>
@@ -72,7 +72,7 @@ function EventCardDefault(props: Props) {
         </Attendees>
         <Button {...buttonProps} />
       </Footer>
-    </EventCard>
+    </CardStyled>
   );
 }
 

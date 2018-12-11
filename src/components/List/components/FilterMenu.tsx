@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import classNames from "classnames";
 
 import Icon from "../../Icon";
-import { constants, withContext } from "../List.settings";
+import { withContext } from "../List.settings";
+import { FilterTypes } from "../List";
 
+/////////////////////////////////////////////////////////// Render Item Menu
 
-const renderItem = ({ name, type, activeFilter, toggleFilter }) => {
+type ItemType = {
+  name: string;
+  type: FilterTypes;
+  activeFilter: FilterTypes;
+  toggleFilter(type: FilterTypes): void;
+};
+const renderItem = ({ name, type, activeFilter, toggleFilter }: ItemType) => {
   const active = activeFilter == type;
   return (
     <li className={classNames({ active })}>
@@ -14,17 +22,34 @@ const renderItem = ({ name, type, activeFilter, toggleFilter }) => {
   );
 };
 
-class FilterMenu extends Component {
-  static getDerivedStateFromProps(props) {
+/////////////////////////////////////////////////////////// UI
+
+type Props = {
+  filter: FilterTypes;
+  toggleFilter(type: FilterTypes): void;
+};
+
+type State = {
+  selected: string;
+  isOpen: boolean;
+  canRender: boolean;
+  isDesktop: boolean;
+};
+
+class FilterMenu extends Component<Props, State> {
+  static getDerivedStateFromProps(props: Props) {
     return {
       selected: props.filter
     };
   }
+
   state = {
     selected: "",
     isOpen: false,
+    canRender: false,
     isDesktop: true
   };
+
   componentDidMount() {
     this.onResize();
     window.addEventListener("resize", this.onResize);
@@ -32,24 +57,25 @@ class FilterMenu extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.onResize);
   }
+
   onResize = () => {
     const isDesktop = window.innerWidth > 750;
     if (isDesktop === this.state.isDesktop) return false;
     this.setState({ isDesktop, canRender: true });
-  }
+  };
 
-  toggleDropdown = () => {
+  dropdownToggler = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
   mobileVersion = () => {
     return (
       <div
         className="FilterMenu-dropdown flex-row"
-        onClick={this.toggleDropdown}
+        onClick={this.dropdownToggler}
       >
         <span>SHOW:</span>
         <p className="FilterMenu-selected text-dark">{this.state.selected}</p>
-        <Icon type={Icon.Type.arrowBack} size="small" />
+        <Icon type={Icon.Type.arrowBack} size={Icon.Size.small} />
         {this.menu()}
       </div>
     );
@@ -66,19 +92,19 @@ class FilterMenu extends Component {
       <ul className={menuClass}>
         {renderItem({
           name: "All events",
-          type: constants.ALL_EVENTS,
+          type: FilterTypes.ALL_EVENTS,
           activeFilter: filter,
           toggleFilter
         })}
         {renderItem({
           name: "Future events",
-          type: constants.FUTURE_EVENTS,
+          type: FilterTypes.FUTURE_EVENTS,
           activeFilter: filter,
           toggleFilter
         })}
         {renderItem({
           name: "Past events",
-          type: constants.PAST_EVENTS,
+          type: FilterTypes.PAST_EVENTS,
           activeFilter: filter,
           toggleFilter
         })}

@@ -1,4 +1,3 @@
-import { Reducer } from 'redux';
 ////////////////// Types
 
 enum CONSTANTS {
@@ -16,7 +15,7 @@ type Payload = {
 ///////////////////////////// Initial State
 
 const initialState = {
-  auth: false,
+  auth: true,
   user: {}
 };
 
@@ -38,9 +37,7 @@ export const userReducer = (state: object = initialState, action: Payload) => {
   switch (action.type) {
     case CONSTANTS.SET_USER:
       return { auth: true, ...action.payload };
-
     case CONSTANTS.SET_LOGOUT:
-      document.cookie = "refreshToken=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
       return initialState;
 
     default:

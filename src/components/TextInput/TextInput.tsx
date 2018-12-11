@@ -71,7 +71,7 @@ class TextInput extends PureComponent<Props, State> {
         hasContent: true
       };
     }
-    return {};
+    return { value: props.value || "" };
   }
 
   constructor(props: Props) {

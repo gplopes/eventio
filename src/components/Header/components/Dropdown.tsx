@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
+import urls from '../../../routes/urls';
+
 /////////////////////////// Types
 type Props = {
   setLogout(): void;
@@ -61,7 +63,7 @@ function Dropdown(props: Props) {
     <DropdownContainer>
       <ul>
         <li>
-          <Link href="/profile">
+          <Link href={urls.PROFILE} prefetch>
             <a>Profile</a>
           </Link>
         </li>

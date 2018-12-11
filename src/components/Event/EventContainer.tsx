@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import EventCard from "./EventCard";
-import EventCardSimplified from "./EventCard.Simplified";
+import Card from "./Card";
+import ListItem from "./ListItem";
 
 // Utils
 import beautifyDate from "../../utils/beautifyDate";
@@ -27,7 +27,7 @@ type Props = {
   attendees: object[];
   description: string;
   big: boolean;
-  simplified: boolean;
+  isList: boolean;
 };
 
 ///////////////////////////////////////////// UI
@@ -42,7 +42,7 @@ function EventCardContainer(props: Props) {
     description,
     trimDesc,
     _id,
-    simplified
+    isList
   } = props;
 
   const buttonProps = {
@@ -64,16 +64,12 @@ function EventCardContainer(props: Props) {
     eventDesc
   };
 
-  return !simplified ? (
-    <EventCardSimplified {...propsThrough} />
-  ) : (
-    <EventCard {...propsThrough} />
-  );
+  return isList ? <ListItem {...propsThrough} /> : <Card {...propsThrough} />;
 }
 
 EventCardContainer.displayName = "EventCardContainer";
 EventCardContainer.defaultProps = {
-  simplified: false
+  isList: false
 };
 
 ///////////////////////////////////////////// Connnect

@@ -3,9 +3,11 @@ import Router from "next/router";
 import { connect } from 'react-redux';
 import { setUser } from "../store/userStore";
 
+import urls from '../routes/urls';
 import Page from "../layouts/Page";
 
-import { userApi, getErrorMsg } from "../api";
+
+import userApi from "../services/auth/authApi";
 
 import Banner from "../components/Banner/Banner";
 import TextInput from "../components/TextInput";
@@ -15,7 +17,8 @@ import { NonAuth } from "../components/Header/components/Messages";
 // Utils
 import { validateEmail, TypeValidation } from "../utils/validates";
 
-// Page Config
+///////////////////////////////////////////////////// Page Config
+
 const pageProps = {
   name: "Login",
   title: "Welcome back trooper",
@@ -40,12 +43,14 @@ type State = {
 };
 
 //////////////////////////////////////////// UI
+
 class Login extends Component<Props, State> {
   password: any; //ReactNode;
   email: any; //ReactNode;
   emailProps: {
     ref: (node: ReactNode) => ReactNode;
     label: string;
+    value: string;
     validator(val: string): TypeValidation;
   };
 
@@ -68,6 +73,7 @@ class Login extends Component<Props, State> {
     this.emailProps = {
       ref: (node: ReactNode) => (this.email = node),
       label: "Email",
+      value: "thor@strv.com",
       validator: validateEmail
     };
   }
@@ -99,13 +105,13 @@ class Login extends Component<Props, State> {
       .login(email, password)
       .then(user => {
         this.props.setUser(user);
-        Router.replace("/dashboard");
+        Router.replace(urls.HOME);
       })
       .catch(error => {
         this.setState({
           isSubmitting: false,
           hasError: true,
-          errorMsg: getErrorMsg(error)
+          errorMsg: "" //getErrorMsg(error)
         });
       });
   };
@@ -123,6 +129,7 @@ class Login extends Component<Props, State> {
       ref: (node: ReactNode) => (this.password = node),
       type: pwdType,
       label: "Password",
+      value: "missMyBroth3r",
       icon: true,
       iconProps: {
         className: `${this.state.pwdType === "text" && "active"}`,

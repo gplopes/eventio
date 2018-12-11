@@ -6,7 +6,8 @@ type Props = {
 };
 
 ////////////////////////////////////////// EventCard
-export const EventCard = styled.div`
+
+export const CardStyled = styled.div`
   background-color: white;
   padding: 32px;
   height: 320px;
@@ -33,9 +34,6 @@ export const EventCard = styled.div`
       height: auto;
       h5 {
         font-size: 45px;
-      }
-      .EventCard-desc {
-        max-width: 80%;
       }
     `}
 `;

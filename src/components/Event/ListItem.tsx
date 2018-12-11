@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 
+import { ListItemStyled } from './ListItem.style';
+
 import trim from "../../utils/trim";
-import Button from "./components/Button";
+import Button from "./components/EventButtonContainer";
 
 ///////////////////////////////////// Props
 
@@ -62,7 +64,7 @@ function EventCardSimplified(props: Props) {
   } = props;
 
   return (
-    <div className="ListItem flex-row">
+    <ListItemStyled className="flex-row">
       <div className="ListItem-event flex-row">
         <Desc
           title={title}
@@ -81,7 +83,7 @@ function EventCardSimplified(props: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </ListItemStyled>
   );
 }
 

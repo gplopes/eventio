@@ -6,7 +6,7 @@ import "./List.style.scss";
 
 import { Section } from "../../layouts";
 
-import EventCardContainer from "../EventCard/EventCard.Container";
+import EventCardContainer from "../Event/EventContainer";
 
 // Config
 import { Provider, filterItem } from "./List.settings";
@@ -89,10 +89,10 @@ export default class List extends PureComponent<Props, State> {
 
   renderItem = (event: any) => {
     const { view } = this.state;
-    const isSimplified = view === LayoutTypes.GRID_VIEW;
+    const isList = view === LayoutTypes.LIST_VIEW;
     return (
       <div className="col" key={event.id}>
-        <EventCardContainer {...event} trimDesc simplified={isSimplified} />
+        <EventCardContainer {...event} trimDesc isList={isList} />
       </div>
     );
   };

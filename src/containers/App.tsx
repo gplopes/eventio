@@ -10,7 +10,8 @@ import { setUser } from "../store/userStore";
 import color from "../theme/colors";
 
 import Header from "../components/Header/Header";
-// import { Provider as OldProvider } from "../store";
+
+/////////////////////////////////// Type
 
 type Props = {
   Component: any;
@@ -20,17 +21,13 @@ type Props = {
 
 /////////////////////////////////// setUser
 
-stores.subscribe(() => {
-  console.log(stores.getState());
-});
-
 const registerUser = (user: object) => stores.dispatch(setUser(user));
 
 /////////////////////////////////// UI
 
 function App(props: Props) {
   const { Component, pageProps } = props;
-  props.user && registerUser(props.user);
+  //props.user && registerUser(props.user);
   return (
     <ThemeProvider theme={{ color }}>
       <Provider store={stores}>

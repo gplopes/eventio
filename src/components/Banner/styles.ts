@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { fadeIn } from "../../theme/keyframes";
 
 type Props = {
@@ -14,14 +14,10 @@ export const BannerStyled = styled.div`
   align-items: flex-end;
   justify-content: center;
   padding: 80px 60px;
-  /* padding: 80px $global-padding; */
   background-color: ${({ theme }) => theme.color.text};
   background-size: cover;
-  ${(props: Props) =>
-    props.bg &&
-    css`
-      background-image: url(${props.bg});
-    `} /* @include media($breakpoint-tablet) {
+  background-image: url(${(props: Props) => props.bg});
+ /* @include media($breakpoint-tablet) {
     display: none;
   } */
 `;

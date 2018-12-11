@@ -5,12 +5,16 @@ import Icon from "../../Icon";
 import { withContext } from "../List.settings";
 import { LayoutTypes } from "../List";
 
+/////////////////////////////////////////////// Types
+
 type IconType = {
   icon: Icon.Type;
   type: LayoutTypes;
   activeView: LayoutTypes;
   toggleView(val: LayoutTypes): void;
 };
+
+/////////////////////////////////////////////////// Render Icons
 
 const renderIcon = withContext((params: IconType) => {
   const { icon, type, activeView, toggleView } = params;

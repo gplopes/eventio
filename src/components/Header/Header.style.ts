@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
+export const HeaderStyled = styled.header`
   padding: 39px 0;
   z-index: 10;
   position: absolute;
