@@ -1,25 +1,30 @@
 import styled from "styled-components";
+
+/// Themes
 import { fadeIn } from "../../theme/keyframes";
+import colors from '../../theme/colors';
+import { fontSecondary } from '../../theme/fonts';
+import breakpoints from '../../theme/breakpoint';
 
 type Props = {
   bg?: string;
 };
 
-export const BannerStyled = styled.div`
-  overflow: hidden;
-  position: relative;
-  width: 47%;
-  max-width: 480px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 80px 60px;
-  background-color: ${({ theme }) => theme.color.text};
-  background-size: cover;
-  background-image: url(${(props: Props) => props.bg});
- /* @include media($breakpoint-tablet) {
-    display: none;
-  } */
+export const BannerStyled = styled.div<Props>`
+  display: none;
+  @media (min-width: ${breakpoints.phablet}px) {
+    overflow: hidden;
+    position: relative;
+    width: 47%;
+    max-width: 480px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 80px 60px;
+    background-color: ${colors.text};
+    background-size: cover;
+    background-image: url(${props => props.bg});
+  }
 `;
 
 export const Quote = styled.div`
@@ -29,15 +34,15 @@ export const Quote = styled.div`
   animation: ${fadeIn} 0.5s ease;
 
   h3 {
-    /* font-family: $font-secondary; */
+    font-family: ${fontSecondary};
   }
   p {
-    /* color: $colors-grey-regent; */
+    color: ${colors.greyRegent};
   }
 
   hr {
     width: 12px;
     height: 2px;
-    background-color: ${({ theme }) => theme.color.primary};
+    background-color: ${colors.primary};
   }
 `;

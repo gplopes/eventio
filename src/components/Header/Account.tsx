@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 
-
 import { Button, AccountContainer } from "./Account.styles";
 
 import Dropdown from "./components/Dropdown";
 import Avatar from "../Avatar/Avatar";
 import getUserName from "../../utils/getUserName";
-
 
 /////////////////////////////////////////////////////////////// Type
 

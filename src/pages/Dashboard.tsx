@@ -13,8 +13,7 @@ import Action from "../components/ActionButton/ActionButton";
 
 const pageProps = {
   name: "Dashboard",
-  title: "My Eventio",
-  headerGap: true
+  title: "My Eventio"
 };
 
 /////////////////////////////////////////////////////// Type
@@ -22,7 +21,7 @@ const pageProps = {
 type Props = {
   events: object[];
   error: null | string;
-  hasLoaded: boolean;
+  status: boolean;
   fetchAllEvents(): void;
   setEvents(event: object): void;
 };
@@ -35,10 +34,10 @@ class Dashboard extends Component<Props> {
   }
   actionHandler = () => Router.push(urls.NEW_EVENT);
   render() {
-    const { events } = this.props;
+    const { events, status, error } = this.props;
     return (
       <Page {...pageProps}>
-        <List events={events} hasLoaded={this.props.hasLoaded}>
+        <List events={events} loading={status} error={error}>
           <div className="flex-row">
             <List.FilterMenu />
             <List.ToggleLayout />
@@ -56,7 +55,7 @@ const mapDispatchToProps = { setEvents, fetchAllEvents };
 
 const mapStateToProps = (state: any) => {
   return {
-    hasLoaded: state.events.loading,
+    status: state.events.loading,
     error: state.events.error,
     events: state.events.list
   };

@@ -1,9 +1,14 @@
 import React from "react";
 import classNames from 'classnames';
 
-import Icon from "../../Icon";
+import Icon from "../../Icon/Icon";
 import { withContext } from "../List.settings";
 import { LayoutTypes } from "../List";
+
+
+///////////////////////////////////////////// Styled
+
+
 
 /////////////////////////////////////////////// Types
 
@@ -38,7 +43,7 @@ type ToggleType = {
 function ToggleLayout(params: ToggleType) {
   const { view, toggleView } = params;
   return (
-    <div className="List-switcher flex-row">
+    <div className="flex-row">
       {renderIcon({
         icon: Icon.Type.grid,
         type: LayoutTypes.GRID_VIEW,

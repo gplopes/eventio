@@ -4,14 +4,8 @@ import styled from "styled-components";
 
 import urls from '../../../routes/urls';
 
-/////////////////////////// Types
-type Props = {
-  setLogout(): void;
-};
-
-const defaultProps: Props = {
-  setLogout() {}
-};
+// Theme
+import colors from '../../../theme/colors';
 
 //////////////////////////////////////// Styled
 
@@ -47,18 +41,30 @@ const DropdownContainer = styled.div`
     padding: 5px 20px;
   }
   a {
-    color: $colors-grey-chateau;
+    color: ${colors.greyChateau};
     display: block;
     &:hover {
-      color: $colors-text;
+      color: ${colors.text};
     }
   }
 `;
 
+
+/////////////////////////// Types
+
+type Props = {
+  setLogout(): void;
+};
+
+const defaultProps: Props = {
+  setLogout() {}
+};
+
+
 /////////////////////////////////////// UI
 
 function Dropdown(props: Props) {
-  const { setLogout } = Object.assign({}, defaultProps, props);
+  const { setLogout } = props;
   return (
     <DropdownContainer>
       <ul>
@@ -74,5 +80,7 @@ function Dropdown(props: Props) {
     </DropdownContainer>
   );
 }
+
+Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

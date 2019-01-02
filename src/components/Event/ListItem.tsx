@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { ListItemStyled } from './ListItem.style';
+import { ListItemStyled, ListInfoStyled } from './ListItem.style';
 
 import trim from "../../utils/trim";
 import Button from "./components/EventButtonContainer";
@@ -29,10 +29,10 @@ type Props = {
 function Desc({ title, description, linkProps }: any) {
   return (
     <Link href={linkProps}>
-      <a className="flex-row ListItem-wrap">
+      <ListInfoStyled className="flex-row">
         <h6 className="strong">{title}</h6>
         <p className="ListItem-desc">{trim(description, 31)}</p>
-      </a>
+      </ListInfoStyled>
     </Link>
   );
 }
@@ -65,7 +65,7 @@ function EventCardSimplified(props: Props) {
 
   return (
     <ListItemStyled className="flex-row">
-      <div className="ListItem-event flex-row">
+      <div className="flex-row" style={{width: '100%'}}>
         <Desc
           title={title}
           description={description}

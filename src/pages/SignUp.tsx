@@ -6,7 +6,7 @@ import TextInput from "../components/TextInput";
 import Button from "../components/Button/Button";
 
 import { HaveAccount } from "../components/Header/components/Messages";
-import { validateEmail, validatePassword, TypeValidation } from "../utils/validates";
+import { validateEmail, validatePassword, TypeValidation } from "../components/TextInput/utils/validates";
 
 /////////////////////////////// Page Config
 

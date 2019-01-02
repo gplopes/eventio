@@ -17,7 +17,7 @@ type Props = {
   rightComponent: ReactNode;
   centerItem: ReactNode;
   user?: {
-    auth: boolean;
+    authToken: string;
     firstName: string;
     lastName: string;
   };
@@ -51,7 +51,7 @@ function Header(props: Props) {
 
   /// Right Item
   const renderRightItem = (): ReactNode | null => {
-    if (user && user.auth && !hideAccount) {
+    if (user && user.authToken && !hideAccount) {
       return <Account {...user} setLogout={setLogout} />;
     }
 

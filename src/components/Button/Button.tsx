@@ -23,21 +23,30 @@ export enum SizeType {
 
 type Props = {
   children?: string;
-  type?: ButtonType;
+  type?: string;
+  color?: ButtonType;
   size?: SizeType;
   disabled?: boolean;
   onClick(): void;
   loading?: boolean;
 };
 
+const defaultProps: Props = {
+    color: ButtonType.primary,
+    disabled: false,
+    loading: false,
+    size: SizeType.big,
+    onClick: function() {}
+};
 
 ////////////////////////////////////////////// UI
 
 function ButtonContainer(props: Props) {
-  const { children, type, size, disabled, onClick, loading } = props;
+  const { children, color, type, size, disabled, onClick, loading } = props;
   return (
     <Button
       size={size}
+      color={color}
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
@@ -47,17 +56,11 @@ function ButtonContainer(props: Props) {
   );
 }
 
-ButtonContainer.defaultProps = {
-  type: ButtonType.primary,
-  disabled: false,
-  loading: false,
-  size: SizeType.big,
-  onClick: function() {}
-};
+///////////////////////////////////// Options
 
-//////////////////////////////// Options
-
+ButtonContainer.defaultProps = defaultProps;
 ButtonContainer.Type = ButtonType;
 ButtonContainer.Size = SizeType;
+
 
 export default ButtonContainer;

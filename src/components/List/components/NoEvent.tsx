@@ -29,7 +29,7 @@ function NoEvent({ msg }: { msg: string }) {
 }
 
 NoEvent.defaultProps = {
-  msg: "No Events"
+  msg: ""
 };
 
 export default NoEvent;

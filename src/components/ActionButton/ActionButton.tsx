@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 import Icon from "../Icon/Icon";
 
-/// Theme  Styling
+/// Theme
 import { inOutBack } from "../../theme/easing";
 import { bounceInUp } from "../../theme/keyframes";
+import colors from '../../theme/colors';
 
 ///////////////////////////////////// Props
 
@@ -28,7 +29,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.color.dark};
+  background-color: ${colors.dark};
   box-shadow: 0 6px 9px 0 rgba(53, 53, 53, 0.1);
   transition: transform 0.2s ${inOutBack};
   animation: ${bounceInUp} 0.7s ${inOutBack} 0.5s backwards;

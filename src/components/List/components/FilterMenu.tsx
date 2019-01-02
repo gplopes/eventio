@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 
-import Icon from "../../Icon";
+import { FilterMenuStyled } from "./FilterMenu.style";
+
+import Icon from "../../Icon/Icon";
 import { withContext } from "../List.settings";
 import { FilterTypes } from "../List";
 
-/////////////////////////////////////////////////////////// Render Item Menu
+import { ListMenuStyled } from './FilterMenu.style';
+
+/////////////////////////////////////////////////////////// Props
+
+type Props = {
+  filter: FilterTypes;
+  toggleFilter(type: FilterTypes): void;
+};
+
+type State = {
+  selected: string;
+  isOpen: boolean;
+  canRender: boolean;
+  isDesktop: boolean;
+};
+
+///////////////////////////////////////////// Render Item Menu
 
 type ItemType = {
   name: string;
@@ -22,19 +40,7 @@ const renderItem = ({ name, type, activeFilter, toggleFilter }: ItemType) => {
   );
 };
 
-/////////////////////////////////////////////////////////// UI
-
-type Props = {
-  filter: FilterTypes;
-  toggleFilter(type: FilterTypes): void;
-};
-
-type State = {
-  selected: string;
-  isOpen: boolean;
-  canRender: boolean;
-  isDesktop: boolean;
-};
+/////////////////////////////////////////////////// UI
 
 class FilterMenu extends Component<Props, State> {
   static getDerivedStateFromProps(props: Props) {
@@ -69,15 +75,12 @@ class FilterMenu extends Component<Props, State> {
   };
   mobileVersion = () => {
     return (
-      <div
-        className="FilterMenu-dropdown flex-row"
-        onClick={this.dropdownToggler}
-      >
+      <FilterMenuStyled className="flex-row" onClick={this.dropdownToggler}>
         <span>SHOW:</span>
-        <p className="FilterMenu-selected text-dark">{this.state.selected}</p>
+        <p className="selected">{this.state.selected}</p>
         <Icon type={Icon.Type.arrowBack} size={Icon.Size.small} />
         {this.menu()}
-      </div>
+      </FilterMenuStyled>
     );
   };
   menu = () => {
@@ -89,7 +92,7 @@ class FilterMenu extends Component<Props, State> {
       opened: isOpen
     });
     return (
-      <ul className={menuClass}>
+      <ListMenuStyled className={menuClass}>
         {renderItem({
           name: "All events",
           type: FilterTypes.ALL_EVENTS,
@@ -108,7 +111,7 @@ class FilterMenu extends Component<Props, State> {
           activeFilter: filter,
           toggleFilter
         })}
-      </ul>
+      </ListMenuStyled>
     );
   };
   render() {

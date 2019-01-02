@@ -2,17 +2,18 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
+import colors from '../../../theme/colors';
 
 ///////////////////////////////////// Styled
 
 const MsgContainer = styled.p`
   font-size: 14px;
-  /* color: $colors-text-light; */
+  color: ${colors.textInvert};
   a {
-    /* color: $colors-grey-regent; */
+    color: ${colors.greyRegent};
     /* font-weight: $weight-semibold; */
     &:hover {
-      /* color: $colors-blue-spruce; */
+      color: ${colors.blueSpruce};
     }
   }
 `;

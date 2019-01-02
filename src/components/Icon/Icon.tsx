@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import "./Icon.styles.scss";
 
 
-//////////////////////////////// Types
+//////////////////////////////// Options
 
 enum IconType {
   eye = "icon-eye",
@@ -25,6 +24,8 @@ enum SizeType {
   normal = 'normal',
   big = 'big'
 };
+
+//////////////////////////////////// Types
 
 type Props = {
   onClick?: () => void,

@@ -4,13 +4,16 @@ import styled from "styled-components";
 
 import Icon from "../../Icon/Icon";
 
+import colors from '../../../theme/colors';
+
 //////////////////////////////////////////// Styled
 
 const HeaderButton = styled.a`
-  /* color: $colors-blue-spruce;
+  /*
   font-weight: $weight-semibold;
   font-size: $font-size-small;
   line-height: $font-size-small; */
+  color: ${colors.blueSpruce};
   text-transform: uppercase;
   p {
     margin-top: 4px;

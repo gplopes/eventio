@@ -40,7 +40,7 @@ type Payload = {
   type: CONSTANTS;
 };
 
-/////////////////////////////////// Actions
+////////////////////////////////////////////////////////  Actions
 
 export const setEvents = (events: object[]): Payload => ({
   payload: {
@@ -67,7 +67,7 @@ const errorEvents = (errMsg: string): Payload => ({
   type: CONSTANTS.FETCH_ERROR
 });
 
-/////////////////////////// Actions Async
+///////////////////////////////////////////////// Actions Async
 
 export const fetchAllEvents = () => {
   return (dispatch: any) => {
@@ -83,7 +83,7 @@ export const joinEvent = (eventId: string) => {
   return (dispatch: any, getState: any) => {
     const { user } = getState();
     eventApi
-      .joinEvent(eventId, user.token)
+      .joinEvent(eventId, user.authToken)
       .then(() => dispatch(fetchAllEvents()));
   };
 };
@@ -92,7 +92,7 @@ export const leaveEvent = (eventId: string) => {
   return (dispatch: any, getState: any) => {
     const { user } = getState();
     eventApi
-      .leaveEvent(eventId, user.token)
+      .leaveEvent(eventId, user.authToken)
       .then(() => dispatch(fetchAllEvents()));
   };
 };

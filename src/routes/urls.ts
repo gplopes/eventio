@@ -1,5 +1,6 @@
 enum urls {
   NEW_EVENT = "/event/new",
+  ROOT = "/",
   HOME = "/my",
   EVENT = "/event",
   LOGIN = "/login",

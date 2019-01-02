@@ -1,54 +1,72 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import classNames from "classnames";
+import styled, { css } from "styled-components";
+
+import breakpoints from "../theme/breakpoint";
 
 import "../styles/main.scss";
+
+///////////////////////////////////// Types
 
 type Props = {
   children?: ReactNode;
   name?: string;
   title?: string;
   className?: string;
-  type?: string;
-  headerGap?: boolean;
+  topGap?: boolean;
   fullScreen?: boolean;
 };
 
 const defaultProps: Props = {
-  headerGap: true,
+  topGap: true,
   fullScreen: false,
   title: "Eventio"
 };
 
-const Page = (props: Props = defaultProps) => {
-  const {
-    children,
-    name,
-    title,
-    className,
-    type,
-    headerGap,
-    fullScreen
-  } = props;
+///////////////////////////////////// Styled
 
-  const mainClasses = classNames(className, type, {
-    "header-gap": headerGap,
-    "full-screen": fullScreen
-  });
+const Main = styled.main<Props>`
+  padding-top: 90px;
+  min-height: auto;
+
+  @media (min-width: ${breakpoints.phablet}px) {
+    min-height: 100%;
+    padding-top: ${props => (props.topGap ? 120 : 0)}px;
+
+    ${props =>
+      props.fullScreen &&
+      css`
+        display: flex;
+        min-height: 100vh;
+      `}
+  }
+`;
+
+///////////////////////////////////// UI
+
+const Page = (props: Props) => {
+  const { children, name, title, className, topGap, fullScreen } = props;
   return (
-    <main className={mainClasses} data-page={name}>
+    <Main
+      className={className}
+      data-page={name}
+      topGap={topGap}
+      fullScreen={fullScreen}
+    >
       <Head>
         <title>Eventio | {title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content="Eventio" />
-        <meta property="og:url" content="www.strv.com/eventio" />
-        <meta property="og:description" content="Site for events" />
+        <meta property="og:url" content="eventio.io" />
+        <meta property="og:description" content="Eventio" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="www.eventio.image.com" />
+        <meta property="og:image" content="eventio/image" />
       </Head>
       {children}
-    </main>
+    </Main>
   );
 };
+
+Page.defaultProps = defaultProps;
 
 export default Page;

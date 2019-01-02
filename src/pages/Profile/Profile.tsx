@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { EventType, fetchAllEvents } from "../store/eventsStore";
-import { Page } from "../layouts";
+import { EventType, fetchAllEvents } from "../../store/eventsStore";
+import Page from "../../layouts/Page";
 
-import List from "../components/List/List";
-import ProfileHeader from "../components/ProfileHeader";
+import List from "../../components/List/List";
+import ProfileHeader from "./components/Header";
 
 ////////////////////////////////////////////////// Page Config
 
 const pageProps = {
   name: "Profile",
-  title: "My Profile",
-  headerGap: true
+  title: "My Profile"
 };
 
 ////////////////////////////////////////// Types
@@ -20,7 +19,7 @@ const pageProps = {
 type Props = {
   events: object[];
   error: null | string;
-  hasLoaded: boolean;
+  status: boolean;
   fetchAllEvents(): void;
 };
 
@@ -31,11 +30,11 @@ class Profile extends Component<Props> {
     this.props.events.length === 0 && this.props.fetchAllEvents();
   }
   render() {
-    const { events, hasLoaded } = this.props;
+    const { events, status } = this.props;
     return (
       <Page {...pageProps}>
         <ProfileHeader />
-        <List events={events} hasLoaded={hasLoaded}>
+        <List events={events} loading={status}>
           <div className="flex-row">
             <h5>My Events</h5>
             <List.ToggleLayout />
@@ -50,7 +49,6 @@ class Profile extends Component<Props> {
 
 // Private
 const onlyMyEvents = (events: EventType[], myId: string) => {
-  return [];
   return events.filter(({ owner, attendees }) => {
     const myEvent = owner.id === myId;
     const joined = attendees.filter(attendee => attendee.id === myId);
@@ -60,7 +58,7 @@ const onlyMyEvents = (events: EventType[], myId: string) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    hasLoaded: state.events.loading,
+    status: state.events.loading,
     error: state.events.error,
     events: onlyMyEvents(state.events.list, state.user.id)
   };

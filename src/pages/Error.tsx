@@ -2,30 +2,31 @@ import React, { PureComponent } from "react";
 import Router from "next/router";
 import httpStatus from "http-status";
 
-import Page from "../src/layouts/Page";
-import Banner from "../src/components/Banner/Banner";
-import Button from "../src/components/Button/Button";
-import { NonAuth } from "../src/components/Header/components/Messages";
+import Page from "../layouts/Page";
+import Banner from "../components/Banner/Banner";
+import Button from "../components/Button/Button";
 
+import urls from '../routes/urls';
 
-// Page Config
+////////////////////////////////////////////// Types
+
+type Props = {
+  statusCode: number;
+}
+
+////////////////////////////////////////////// Page Config
+
 const pageProps = {
   name: "Error",
   fullScreen: true,
   headerGap: false
 };
 
-export default class Error extends PureComponent {
-  static headerProps = {
-    lightLogo: true,
-    rightComponent: <NonAuth />
-  };
-  static getInitialProps({ res, err }) {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-    return { statusCode };
-  }
+//////////////////////////////////////////////// UI
+
+export default class Error extends PureComponent<Props> {
   refreshHandler = () => {
-    Router.replace("/dashboard");
+    Router.replace(urls.HOME);
   };
   render() {
     const { statusCode } = this.props;
@@ -47,6 +48,7 @@ export default class Error extends PureComponent {
               Please press the refresh button and everything should be fine
               again
             </p>
+            <br/>
             <Button type={Button.Type.dark} onClick={this.refreshHandler}>
               Refresh
             </Button>

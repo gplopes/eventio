@@ -12,7 +12,7 @@ import {
 } from "./Card.style";
 
 import Button from "./components/EventButtonContainer";
-import Icon from "../Icon";
+import Icon from "../Icon/Icon";
 
 ///////////////////////////////////// Props
 
@@ -46,9 +46,9 @@ function EventCardDefault(props: Props) {
   } = props;
 
   return (
-    <CardStyled>
-      <StartsAt>{startsAt}</StartsAt>
-      <Link href={linkProps}>
+    <Link href={linkProps}>
+      <CardStyled>
+        <StartsAt>{startsAt}</StartsAt>
         <Href>
           <About>
             <h5>{title}</h5>
@@ -60,23 +60,22 @@ function EventCardDefault(props: Props) {
           </About>
           <Desc>{eventDesc}</Desc>
         </Href>
-      </Link>
-      <Footer className="flex-row">
-        <Attendees className="flex-row">
-          <Icon type={Icon.Type.user} />
-          {attendees && (
-            <span>
-              {attendees.length} of {capacity}
-            </span>
-          )}
-        </Attendees>
-        <Button {...buttonProps} />
-      </Footer>
-    </CardStyled>
+        <Footer className="flex-row">
+          <Attendees className="flex-row">
+            <Icon type={Icon.Type.user} />
+            {attendees && (
+              <span>
+                {attendees.length} of {capacity}
+              </span>
+            )}
+          </Attendees>
+          <Button {...buttonProps} />
+        </Footer>
+      </CardStyled>
+    </Link>
   );
 }
 
 /////////////////////////////////
 
-EventCardDefault.displayName = "EventCardDefault";
 export default EventCardDefault;

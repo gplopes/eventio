@@ -15,7 +15,7 @@ function Logo(props: Props = { light: true }) {
   return (
     <Link href="/" prefetch>
       <a>
-       <ReactSVG svgClassName="Logo" src={src} />
+       <ReactSVG svgClassName="Logo" src={src} svgStyle={{fill: 'red'}} />
       </a>
     </Link>
   );

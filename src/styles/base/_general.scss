@@ -22,22 +22,6 @@ body {
   }
 }
 
-main {
-  min-height: 100%;
-
-  &.header-gap {
-    padding-top: 120px;
-  }
-
-  &.full-screen {
-    display: flex;
-    min-height: 100vh;
-  }
-  @include media($breakpoint-mobile) {
-    padding-top: 90px !important;
-    min-height: auto !important;
-  }
-}
 
 body,
 button,

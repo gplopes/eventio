@@ -16,7 +16,7 @@ const defaultProps: Props = {
 };
 
 function Section(props: Props) {
-  const { children, style, className, container, centeredContent } = Object.assign({}, defaultProps, props);
+  const { children, style, className, container, centeredContent } = props;
   const containerClasses = classNames("container", {"centered-content": centeredContent })
   return (
     <section style={style} className={className}>
@@ -25,5 +25,6 @@ function Section(props: Props) {
   );
 }
 
+Section.defaultProps = defaultProps;
 
 export default Section;

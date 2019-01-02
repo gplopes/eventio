@@ -15,12 +15,14 @@ type Props = {
   attendees: object[];
   eventId: string;
   capacity: number;
+  leaveEvent: (eventId: string) => void;
+  joinEvent: (eventId: string) => void;
 };
 
 ///////////////////////////////////////////////////////////////// Helpers
 
 type State = {
-  type: Button.Type;
+  color: Button.Type;
   text: string;
   action?: (event: string) => void;
 };
@@ -29,7 +31,7 @@ function getButtonStates(params: Props): State {
 
   const state = {
     edit: {
-      type: Button.Type.update,
+      color: Button.Type.update,
       text: "edit",
       action: (eventId: string) =>
         Router.push({
@@ -38,17 +40,17 @@ function getButtonStates(params: Props): State {
         })
     },
     leave: {
-      type: Button.Type.alert,
+      color: Button.Type.alert,
       text: "leave",
       action: params.leaveEvent
     },
     join: {
-      type: Button.Type.primary,
+      color: Button.Type.primary,
       text: "join",
       action: params.joinEvent
     },
     full: {
-      type: Button.Type.disabled,
+      color: Button.Type.disabled,
       text: "Full"
     }
   };
@@ -77,7 +79,7 @@ function EventButtonContainer(props: Props) {
   return (
     <Button
       onClick={() => buttonInfo.action && buttonInfo.action(eventId)}
-      type={buttonInfo.type}
+      color={buttonInfo.color}
       size={Button.Size.small}
     >
       {buttonInfo.text}

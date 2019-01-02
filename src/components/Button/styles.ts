@@ -1,39 +1,44 @@
 import styled, { css } from "styled-components";
 import { SizeType, ButtonType } from "./Button";
 
+import colors from '../../theme/colors';
+
 type Props = {
   loading?: boolean;
   disabled?: boolean;
   size?: SizeType;
-  type?: ButtonType;
+  color?: ButtonType;
 };
 
 /////////////////////////// Styles
 
 const getColor = (props: Props) => {
-  switch (props.type) {
+  switch (props.color) {
     case ButtonType.alert:
       return css`
         color: white;
-        background-color: ${({ theme }) => theme.color.alert};
+        background-color: ${colors.alert};
         &:hover {
-          background-color: darken($colors-red-strawberry, 3);
+          opacity: 0.9;
+          background-color: ${colors.alertHover};
         }
       `;
     case ButtonType.dark:
       return css`
         color: white;
-        background-color: $colors-blue-spruce;
+        background-color: ${colors.blueSpruce};
         &:hover {
-          background-color: darken($colors-blue-spruce, 3);
+          opacity: 0.9;
+          background-color: ${colors.blueSpruceHover};
         }
       `;
     case ButtonType.update:
       return css`
-        color: $colors-grey-aluminium;
-        background-color: ${({ theme }) => theme.color.greyMischka};
+        color: ${colors.greyAluminium};
+        background-color: ${colors.greyMischka};
         &:hover {
-          background-color: darken($colors-grey-mischka, 3);
+          opacity: 0.9;
+          background-color: ${colors.greyMischkaHover};
         }
       `;
 
@@ -41,17 +46,18 @@ const getColor = (props: Props) => {
       return css`
         opacity: 0.5;
         cursor: auto;
-        color: $colors-grey-aluminium;
-        background-color: ${({ theme }) => theme.color.greyMischka};
+        color: ${colors.greyAluminium};
+        background-color: ${colors.greyMischka};
       `;
 
     default:
       return css`
         color: white;
-        background-color: ${({ theme }) => theme.color.primary};
+        background-color: ${colors.primary};
 
         &:hover {
-          background-color: darken($colors-primary, 3);
+          opacity: 0.9;
+          background-color: ${colors.primaryHover};
         }
       `;
   }
@@ -77,10 +83,11 @@ const getSize = (props: Props) => {
   }
 };
 
-///////////////////////////////////// Button
 
-export const Button = styled.button`
-  outline: none;
+///////////////////////////////////////// Components
+
+export const Button = styled.button<Props>`
+ outline: none;
   display: inline-block;
   height: 50px;
   padding: 0 20px;
@@ -102,20 +109,14 @@ export const Button = styled.button`
   ${getColor}
   ${getSize}
 
-  ${(props: Props) =>
-    props.loading &&
+  ${(props) => props.loading &&
     css`
       pointer-events: none;
       cursor: auto;
     `}
 
-  ${(props: Props) =>
-    props.disabled &&
+  ${(props) => props.disabled &&
     css`
       cursor: auto;
     `}
-
-  .Icon {
-    margin: 0 auto;
-  }
 `;

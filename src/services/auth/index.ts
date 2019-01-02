@@ -14,6 +14,15 @@ type CtxType = {
   pathname: string;
 };
 
+type LocalUser = {
+  authToken: string;
+  refreshToken: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: string;
+}
+
 ////////////////////////////////////// GO LOGIN
 
 const isClient = typeof document !== "undefined";
@@ -40,12 +49,12 @@ export const localUser = {
       localStorage.setItem(LOCAL, JSON.stringify(user));
     } catch (e) {}
   },
-  get(): object | null {
+  get(): LocalUser | undefined {
     try {
       const user = localStorage.getItem(LOCAL);
       return user ? JSON.parse(user) : null;
     } catch (e) {
-      return null;
+      return undefined;
     }
   },
   clean() {
@@ -63,8 +72,12 @@ export const cookie = {
     d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
     document.cookie = `${TOKEN}=${refreshToken};path=/;expires=${d.toUTCString()}`;
   },
+  get() {
+    const user = localUser.get();
+    return user && user.refreshToken;
+  },
   reset() {
-    document.cookie = "refreshToken=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+    document.cookie = `${TOKEN}=; expires=Thu, 01-Jan-70 00:00:01 GMT;`;
   }
 };
 
@@ -88,9 +101,10 @@ export default class AuthService {
   // Skip this pages that don't need credentials
   private isPublicPage(pathname: string): boolean {
     return (
+      pathname === urls.ROOT ||
       pathname === urls.LOGIN ||
-      pathname === urls.SIGNIN ||
-      pathname === urls.ERROR
+      pathname === urls.SIGNIN
+      //pathname === urls.ERROR
     );
   }
 
@@ -102,7 +116,7 @@ export default class AuthService {
     } else {
       // with Valid Token
       if (this.isPublicPage(this.ctx.pathname)) this.goTo(urls.HOME);
-      return true;
+      return false;
     }
   };
 }

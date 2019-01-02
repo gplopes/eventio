@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="12px" viewBox="0 0 10 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-delete</title>
+    <desc>Created with Sketch.</desc>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-1-2-Detail-Edit" transform="translate(-1211.000000, -176.000000)">
+            <g id="Delete" transform="translate(1208.000000, 171.000000)">
+                <g id="icon-delete" transform="translate(0.000000, 3.000000)">
+                    <polygon id="Stroke-1" stroke-opacity="0.00784313771" stroke="#000000" stroke-width="1.33333335e-11" points="0 0 15.999999 0 15.999999 15.999999 0 15.999999"></polygon>
+                    <path d="M3.99999976,12.6666659 C3.99999976,13.3999994 4.59999978,13.9999992 5.33333301,13.9999992 L10.666666,13.9999992 C11.3999995,13.9999992 11.9999993,13.3999994 11.9999993,12.6666659 L11.9999993,4.66666639 L3.99999976,4.66666639 L3.99999976,12.6666659 Z M12.6666659,2.66666651 L10.3333327,2.66666651 L9.66666609,1.99999988 L6.33333295,1.99999988 L5.66666633,2.66666651 L3.33333313,2.66666651 L3.33333313,3.99999976 L12.6666659,3.99999976 L12.6666659,2.66666651 Z" id="Fill-2" fill="#FF4081"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

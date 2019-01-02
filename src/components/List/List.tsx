@@ -1,11 +1,7 @@
 import React, { PureComponent } from "react";
-
 import isEqual from "lodash/isEqual";
 
-import "./List.style.scss";
-
-import { Section } from "../../layouts";
-
+import Section  from "../../layouts/Section";
 import EventCardContainer from "../Event/EventContainer";
 
 // Config
@@ -32,7 +28,8 @@ export enum FilterTypes {
 type Props = {
   grid: number;
   title: string;
-  hasLoaded: boolean;
+  loading: boolean;
+  error: string | null;
   events: object[];
 };
 
@@ -50,7 +47,8 @@ export default class List extends PureComponent<Props, State> {
     grid: 3,
     title: null,
     events: [],
-    hasLoaded: false
+    error: null,
+    loading: false
   };
   // Inner Components
   static FilterMenu = FilterMenu;
@@ -107,8 +105,13 @@ export default class List extends PureComponent<Props, State> {
     );
   };
   renderMsg = () => {
-    const { hasLoaded } = this.props;
-    const msg = hasLoaded ? "No Events" : "Loading events";
+    const { loading, events, error } = this.props;
+
+    console.log(this.props);
+    let msg;
+    if (loading) msg = "Loading...";
+    if (!loading && typeof error === 'string') msg = `Something went wrong, ${error}`;
+    if (!loading && error === null && events.length === 0) msg = "No Events...";
     return <NoEvent msg={msg} />;
   };
   render() {
@@ -121,7 +124,7 @@ export default class List extends PureComponent<Props, State> {
     };
     return (
       <Provider value={providerValue}>
-        <Section className="List">{children}</Section>
+        {hasEvents && <Section className="List">{children}</Section>}
         {hasEvents ? this.renderList() : this.renderMsg()}
       </Provider>
     );

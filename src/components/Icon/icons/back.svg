@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-back</title>
+    <desc>Created with Sketch.</desc>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-1-1-Detail" transform="translate(-658.000000, -43.000000)">
+            <g id="Header" transform="translate(43.000000, 27.000000)">
+                <g id="Back" transform="translate(611.000000, 0.000000)">
+                    <g id="icon-back" transform="translate(0.000000, 12.000000)">
+                        <polygon id="Stroke-1" stroke-opacity="0.00784313771" stroke="#000000" stroke-width="1.33333335e-11" points="0 0 23.9999985 0 23.9999985 23.9999985 0 23.9999985"></polygon>
+                        <polygon id="Fill-2" fill="#000000" points="19.9999988 10.9999993 7.82999945 10.9999993 13.4199992 5.40999952 11.9999993 3.99999976 3.99999976 11.9999993 11.9999993 19.9999988 13.409999 18.589999 7.82999945 12.9999992 19.9999988 12.9999992"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

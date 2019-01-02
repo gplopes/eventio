@@ -16,6 +16,7 @@ export const popIn = keyframes`
 `;
 
 /////////////////////////////////// FadeIn
+
 export const fadeIn = keyframes`
   from {
     transform: translate3d(0,50%,0);
@@ -28,6 +29,7 @@ export const fadeIn = keyframes`
 `;
 
 /////////////////////////////////////// BounceInUp
+
 export const bounceInUp = keyframes`
   from,
   60%,

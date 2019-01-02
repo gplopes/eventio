@@ -1,11 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import urls from "../../routes/urls";
+
 import Card from "./Card";
 import ListItem from "./ListItem";
 
-// Utils
-import beautifyDate from "../../utils/beautifyDate";
+// Component Utils
+import beautifyDate from "./utils/beautifyDate";
+
+// Global Utils
 import trim from "../../utils/trim";
 
 ///////////////////////////////////// Props
@@ -53,7 +57,7 @@ function EventCardContainer(props: Props) {
     eventId: _id
   };
 
-  const linkProps = { pathname: "/event", query: { id: _id } };
+  const linkProps = { pathname: urls.EVENT, query: { id: _id } };
   const eventDesc = trimDesc ? trim(description, 100) : description;
 
   const propsThrough = {
@@ -67,17 +71,11 @@ function EventCardContainer(props: Props) {
   return isList ? <ListItem {...propsThrough} /> : <Card {...propsThrough} />;
 }
 
-EventCardContainer.displayName = "EventCardContainer";
 EventCardContainer.defaultProps = {
   isList: false
 };
 
 ///////////////////////////////////////////// Connnect
 
-const mapStateToProps = (state: any) => {
-  return {
-    user: state.user
-  };
-};
-
+const mapStateToProps = (state: any) => ({ user: state.user });
 export default connect(mapStateToProps)(EventCardContainer);
