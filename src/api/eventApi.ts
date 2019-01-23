@@ -63,7 +63,7 @@ const createEvent = (eventInfo: object, authToken: string) => {
   return fetch(url, options).then((r: any) => r.json());
 };
 
-///////////////////////////////////////////////////////// Get Evnet
+///////////////////////////////////////////////////////// Get Event
 
 const getEvent = (eventId: string) => {
   const url = path.join(API, "events", eventId);

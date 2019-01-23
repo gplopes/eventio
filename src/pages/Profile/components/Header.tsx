@@ -62,10 +62,6 @@ ProfileHeader.defaultProps = defaultProps;
 
 //////////////////////////////////////// Connect
 
-const mapStateToProps = (state: any) => {
-  return {
-    user: state.user
-  };
-};
+const mapStateToProps = (state: any) => ({ user: state.user })
 
 export default connect(mapStateToProps)(ProfileHeader);

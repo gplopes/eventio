@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { fadeIn } from "../../theme/keyframes";
 import colors from '../../theme/colors';
 import { fontSecondary } from '../../theme/fonts';
-import breakpoints from '../../theme/breakpoint';
+import breakpoints from '../../theme/breakpoints';
 
 type Props = {
   bg?: string;

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import colors from "../../../theme/colors";
-import breakpoints from '../../../theme/breakpoint';
+import breakpoints from '../../../theme/breakpoints';
 import { outQuart } from "../../../theme/easing";
 
 export const FilterMenuStyled = styled.div`

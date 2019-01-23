@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Head from "next/head";
 import styled, { css } from "styled-components";
 
-import breakpoints from "../theme/breakpoint";
+import breakpoints from "../theme/breakpoints";
 
 import "../styles/main.scss";
 

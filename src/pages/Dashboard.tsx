@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
+
 import { setEvents, fetchAllEvents } from "../store/eventsStore";
 
 import urls from "../routes/urls";

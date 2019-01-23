@@ -1,6 +1,6 @@
 
 import styled from "styled-components";
-import breakpoints from "../theme/breakpoint";
+import breakpoints from "../theme/breakpoints";
 
 
 export const OnlyMobile = styled.div<{ media?: number }>`
